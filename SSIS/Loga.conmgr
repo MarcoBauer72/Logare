@@ -1,0 +1,15 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="Loga"
+  DTS:DTSID="{A34749F2-000E-463F-90D6-EBE71AFF7AAA}"
+  DTS:Description="Conexão com o banco LOGA"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=localhost;User ID=logare;Initial Catalog=Loga;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwBf+vTFSsk6zDN6VnszaUwAAAAACAAAAAAAQZgAAAAEAACAAAAB+N71yjqsr1xEWfrfDqwsT6i+amyDlc6xrPVMhzwBVdAAAAAAOgAAAAAIAACAAAABMMYGhQtAKZ5N43SvG9/yYjSKoTM/KDvXdLxS4myseA4AAAACnUCIm0thLDe00p3dnIdHpF7jVrQCQc64BGFGb83n2jH01OHLjIo6hSEIbPGYKT1qvYryi59B8H/MVEimcDoSWBNeYncM6fk4CvtwQa3UzLvUZ06492Z27GI6eoMoGSliFCwvD0FVTRsCpuevPiPhGBzlZuIAqCaDtVippAv3ju0AAAADbHPC3g4OB2e05OSESTQ1hePSLnnrAT0okt7EeXOJWrZZJLanmLi8k4/D1Nvk2yOCw1KCp8UEOV7naH2OiZ8YH</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

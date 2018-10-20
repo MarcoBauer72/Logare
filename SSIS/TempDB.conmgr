@@ -1,0 +1,14 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="TempDB"
+  DTS:DTSID="{969922B7-FEFD-48E2-8263-4E6A0FBFE28D}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=localhost;User ID=logare;Initial Catalog=tempdb;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwBf+vTFSsk6zDN6VnszaUwAAAAACAAAAAAAQZgAAAAEAACAAAADI8DmNo4xlHTpVs1yKlIGNDrXMW9Q60Y5ku0xceW7ywQAAAAAOgAAAAAIAACAAAACrgP/Ptf0ewr1I8scIp+8VPznOLg6ZpbF0tKDE1mAbC4AAAABXgo0MMylXqoqYKmtn+5IhnU1QdPfRWhFN2I8/FSkwZgK/F1c/ATOXGUZf/ZgPldYU0L1WUtHYN3u16yATHayInHTfUH/MknUzHpQ7bcKDYYwq/2GVydI2dUGZrs4zT1p3mzK73nRjHNYq4sPGUlpcgTfKChNPI1qIo0g+NHiZOUAAAADzB0KgINua5zQZKBy12+jZ930Au3HmaBGPhBbNJTjOHDuz3U0kvlu/UCyDVrSJ95gueW+cyRdMk2nzi+NVrcNV</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

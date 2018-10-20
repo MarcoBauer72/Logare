@@ -1,0 +1,32 @@
+ 
+ 
+User::fqn
+User::arquivo_txt_data,User::arquivo_txt_nome,User::arquivo_txt_tamanho
+ 
+ 
+ 
+ 
+ 
+using System.IO;
+	
+			// TODO: Add your code here
+             FileInfo oFileInfo;
+
+            oFileInfo = new FileInfo(Dts.Variables["User::fqn"].Value.ToString());
+
+            Dts.Variables["User::arquivo_txt_nome"].Value = oFileInfo.Name.ToString();
+            Dts.Variables["User::arquivo_txt_data"].Value = oFileInfo.CreationTime.ToString("dd-MM-yyyy hh:mm:ss");
+            if (oFileInfo.Length > 0)
+            {
+                Dts.Variables["User::arquivo_txt_tamanho"].Value = oFileInfo.Length.ToString("#,#") + " Bytes";
+
+            }
+            else
+            {
+                Dts.Variables["User::arquivo_txt_tamanho"].Value = oFileInfo.Length.ToString("0 Bytes");
+
+            }
+			
+			Dts.TaskResult = (int)ScriptResults.Success;
+			
+			

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="TISS"
+  DTS:DTSID="{92E5F84D-D599-4CAA-B760-2BD2C2DD3832}"
+  DTS:Description="Conexão com Banco de Dados TISS"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:Retain="True"
+      DTS:ConnectionString="Data Source=localhost;User ID=logare;Initial Catalog=TISS;Provider=SQLNCLI11.1;Persist Security Info=True;Auto Translate=False;">
+      <DTS:Password
+        DTS:Name="Password"
+        Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwBf+vTFSsk6zDN6VnszaUwAAAAACAAAAAAAQZgAAAAEAACAAAAA6ARNlq/CfcDanwxC3WouWjP6nHJCdr0JUih9ybq120QAAAAAOgAAAAAIAACAAAABeITZZYYMEN4CV1QGP6Z8GQQ4zgBAOutU1ywtYjQugqYAAAADX/ggbJKKVfQR/PrYDBf1osSEdou4BaUOY/qNTQeMlKrk3I/EEE8momMiM2152G16WSe0WWULU3ihsrmbsFQYseda7+KbRllYIB0ik7RQgR1QhKYtruXahryF9o9b3LNgZqRe4CesSRgELOwNG55NOfBboSRZYXdth2/twYEr8UEAAAAAHpV35bvcDgYoBIp7O//3VfYGU3m+s4s/Vv0Bm2/+bvFU89SEgxFQtEEyZS9JcynBxQ58mozCLwpuJDBND9UCn</DTS:Password>
+    </DTS:ConnectionManager>
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

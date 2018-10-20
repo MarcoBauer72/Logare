@@ -1,0 +1,3591 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="6/9/2018 9:42:23 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="BAUER-PRECISION"
+  DTS:CreatorName="BAUER-PRECISION\Marco"
+  DTS:DTSID="{2951CC4F-46BF-498A-BA94-D4C10F435BFD}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.3026.27"
+  DTS:LocaleID="1033"
+  DTS:MaxErrorCount="999999"
+  DTS:ObjectName="Importa_TXT-ORIGINAL"
+  DTS:PackageType="5"
+  DTS:VersionBuild="233"
+  DTS:VersionGUID="{5C848A67-EDED-4E8F-A24D-CECD7DE904D0}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[arquivo_texto_conn]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{1ADE4C37-6685-4E8E-807B-E62BAEA1DDA0}"
+      DTS:ObjectName="arquivo_texto_conn">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::fqn]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="E:\OneDrive\BauerTech\Clientes\Logare\Arquivos\SAS\2018\20180808\E1624635.TXT">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="1000"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ColunaUnica"
+              DTS:DTSID="{7E81C4BD-B9E4-4634-9DC9-C4CACCC99D00}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{F99973F6-29D5-422D-B04A-3C48419F8C51}"
+      DTS:ObjectName="Pasta_TXT_SAS">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">E:\OneDrive\BauerTech\Clientes\Logare\Arquivos\SAS\2018</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{35674BCD-4E1C-4528-AFB2-F66952706CA8}"
+      DTS:ObjectName="Pasta_TXT_SAS_ERRO">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">E:\OneDrive\BauerTech\Clientes\Logare\Arquivos\SAS\ERRO</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{EE073D0F-32D0-4579-8667-0FDE1C91CB66}"
+      DTS:ObjectName="Pasta_TXT_SAS_SUCESSO">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">E:\OneDrive\BauerTech\Clientes\Logare\Arquivos\SAS\OK</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{DF172D45-979E-4F56-8D6F-2CC4A3DD4C5F}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ArqID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{10EBC657-2F98-4E82-9690-C6D8EC833A48}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="arquivo_txt_nome">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{668346B2-40F8-44F7-82E8-F8BB37A771DA}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="arquivo_txt_tamanho">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{BC964926-6D07-4309-BBDC-270AFEB0063E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::Pasta_TXT_SAS_ERRO] + &quot;\\&quot; +  SUBSTRING(REVERSE(SUBSTRING(SUBSTRING(REVERSE( @[User::fqn]), FINDSTRING( REVERSE( @[User::fqn]),&quot;\\&quot;,1 )+1 ,LEN(@[User::fqn])),1,8)),1,4) + &quot;\\&quot; + REVERSE(SUBSTRING(SUBSTRING(REVERSE( @[User::fqn]), FINDSTRING( REVERSE( @[User::fqn]),&quot;\\&quot;,1 )  + 1 ,LEN(@[User::fqn])),1,8))"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileDestination_Erro">
+      <DTS:VariableValue
+        DTS:DataType="8">E:\OneDrive\BauerTech\Clientes\Logare\Arquivos\SAS\ERRO\2018\20180808</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{450D327F-F09B-4738-9944-572C2398B89B}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::Pasta_TXT_SAS_SUCESSO] + &quot;\\&quot; +  SUBSTRING(REVERSE(SUBSTRING(SUBSTRING(REVERSE( @[User::fqn]), FINDSTRING( REVERSE( @[User::fqn]),&quot;\\&quot;,1 )+1 ,LEN(@[User::fqn])),1,8)),1,4) + &quot;\\&quot; + REVERSE(SUBSTRING(SUBSTRING(REVERSE( @[User::fqn]), FINDSTRING( REVERSE( @[User::fqn]),&quot;\\&quot;,1 )  + 1 ,LEN(@[User::fqn])),1,8))"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="FileDestination_Successo">
+      <DTS:VariableValue
+        DTS:DataType="8">E:\OneDrive\BauerTech\Clientes\Logare\Arquivos\SAS\OK\2018\20180808</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{2D587A48-CF64-4222-B6BC-4A91475DFE5B}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="fqn">
+      <DTS:VariableValue
+        DTS:DataType="8">E:\OneDrive\BauerTech\Clientes\Logare\Arquivos\SAS\2018\20180808\E1624635.TXT</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{1A192E8F-85AA-4275-B170-F49D6FBDC794}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="num_conta">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{60119082-9DA3-42DB-BE3D-8F88E54FCFAB}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="num_linha">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F459AE52-C363-4615-A282-F9D5AE646CAC}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="qtdContas">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{05EDA8EB-05E5-4532-BE6E-F8E7C1F1E1BC}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="qtdLInhas">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="2">
+    <DTS:Property
+      DTS:DataType="8"
+      DTS:Name="EventFilter">2,7,OnError,12,OnTaskFailed</DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnError"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnTaskFailed"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+  </DTS:LoggingOptions>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\EST - Limpa Tabela Temporaria"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{502BD9E0-E977-47F5-9C53-89EB5B93050B}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:MaxErrorCount="999999"
+      DTS:ObjectName="EST - Limpa Tabela Temporaria"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{969922B7-FEFD-48E2-8263-4E6A0FBFE28D}"
+          SQLTask:SqlStatementSource="IF OBJECT_ID('tempdb.dbo.PreImportaSAS') IS NOT NULL&#xA;TRUNCATE TABLE tempdb.dbo.PreImportaSAS" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{87AAECB1-FA99-4813-AA15-3CD89981B0C2}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:MaxErrorCount="999999"
+      DTS:ObjectName="FELC - Procura Arquivo Texto SAS - SEM CONVERSAO">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{F3C664EA-60AC-45DB-898B-DFE302D3BCF4}"
+        DTS:ObjectName="{F3C664EA-60AC-45DB-898B-DFE302D3BCF4}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[$Package::Pasta_TXT_SAS]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="E:\OneDrive\BauerTech\Clientes\Logare\Arquivos\SAS\2018" />
+            <FEFEProperty
+              FileSpec="*.txt" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="-1" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="2">
+        <DTS:Property
+          DTS:DataType="8"
+          DTS:Name="EventFilter">2,7,OnError,12,OnTaskFailed</DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnError"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnTaskFailed"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+      </DTS:LoggingOptions>
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\EST - Executa lsp_Importar_SAS"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{CA416491-9848-4D58-89B4-38959E2E6EFB}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:MaxErrorCount="999999"
+          DTS:ObjectName="EST - Executa lsp_Importar_SAS"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0"
+            DTS:LoggingMode="1">
+            <DTS:Property
+              DTS:DataType="8"
+              DTS:Name="EventFilter">2,7,OnError,12,OnTaskFailed</DTS:Property>
+            <DTS:Property
+              DTS:EventName="OnError"
+              DTS:Name="ColumnFilter">
+              <DTS:Property
+                DTS:Name="Computer">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="Operator">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="SourceName">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="SourceID">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="ExecutionID">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="MessageText">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="DataBytes">-1</DTS:Property>
+            </DTS:Property>
+            <DTS:Property
+              DTS:EventName="OnTaskFailed"
+              DTS:Name="ColumnFilter">
+              <DTS:Property
+                DTS:Name="Computer">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="Operator">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="SourceName">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="SourceID">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="ExecutionID">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="MessageText">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="DataBytes">-1</DTS:Property>
+            </DTS:Property>
+          </DTS:LoggingOptions>
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{A34749F2-000E-463F-90D6-EBE71AFF7AAA}"
+              SQLTask:SqlStatementSource="EXEC lsp_Importar_SAS ?,?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::qtdContas"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="1"
+                SQLTask:DtsVariableName="User::ArqID"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\FST - Cria Pasta de Destino Err"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{0E676E6A-6781-4A03-842F-38822411DE74}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:MaxErrorCount="999999"
+          DTS:ObjectName="FST - Cria Pasta de Destino Err"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="CreateDirectory"
+              TaskOverwriteDestFile="True"
+              TaskSourcePath="User::FileDestination_Erro"
+              TaskIsSourceVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\FST - Cria Pasta de Destino Succ"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{81291289-c152-414d-bd3a-9a98e31801f0}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:MaxErrorCount="999999"
+          DTS:ObjectName="FST - Cria Pasta de Destino Succ"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="CreateDirectory"
+              TaskOverwriteDestFile="True"
+              TaskSourcePath="User::FileDestination_Successo"
+              TaskIsSourceVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\FST - Move Arquivo Texto bem Sucedido"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{0F90FC1F-61A4-465F-9973-C2952F573EBE}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:MaxErrorCount="999999"
+          DTS:ObjectName="FST - Move Arquivo Texto bem Sucedido"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0"
+            DTS:LoggingMode="1">
+            <DTS:Property
+              DTS:DataType="8"
+              DTS:Name="EventFilter">2,7,OnError,12,OnTaskFailed</DTS:Property>
+            <DTS:Property
+              DTS:EventName="OnError"
+              DTS:Name="ColumnFilter">
+              <DTS:Property
+                DTS:Name="Computer">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="Operator">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="SourceName">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="SourceID">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="ExecutionID">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="MessageText">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="DataBytes">-1</DTS:Property>
+            </DTS:Property>
+            <DTS:Property
+              DTS:EventName="OnTaskFailed"
+              DTS:Name="ColumnFilter">
+              <DTS:Property
+                DTS:Name="Computer">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="Operator">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="SourceName">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="SourceID">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="ExecutionID">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="MessageText">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="DataBytes">-1</DTS:Property>
+            </DTS:Property>
+          </DTS:LoggingOptions>
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="MoveFile"
+              TaskOverwriteDestFile="True"
+              TaskSourcePath="User::fqn"
+              TaskIsSourceVariable="True"
+              TaskDestinationPath="User::FileDestination_Successo"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\FST - Move Arquivo Texto mal Sucedido"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{53976ac7-1d0d-462d-8f65-7942c36dd82d}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:MaxErrorCount="999999"
+          DTS:ObjectName="FST - Move Arquivo Texto mal Sucedido"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0"
+            DTS:LoggingMode="1">
+            <DTS:Property
+              DTS:DataType="8"
+              DTS:Name="EventFilter">2,7,OnError,12,OnTaskFailed</DTS:Property>
+            <DTS:Property
+              DTS:EventName="OnError"
+              DTS:Name="ColumnFilter">
+              <DTS:Property
+                DTS:Name="Computer">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="Operator">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="SourceName">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="SourceID">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="ExecutionID">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="MessageText">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="DataBytes">-1</DTS:Property>
+            </DTS:Property>
+            <DTS:Property
+              DTS:EventName="OnTaskFailed"
+              DTS:Name="ColumnFilter">
+              <DTS:Property
+                DTS:Name="Computer">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="Operator">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="SourceName">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="SourceID">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="ExecutionID">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="MessageText">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="DataBytes">-1</DTS:Property>
+            </DTS:Property>
+          </DTS:LoggingOptions>
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="MoveFile"
+              TaskOverwriteDestFile="True"
+              TaskSourcePath="User::fqn"
+              TaskIsSourceVariable="True"
+              TaskDestinationPath="User::FileDestination_Erro"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado"
+          DTS:CreationName="STOCK:SEQUENCE"
+          DTS:Description="Sequence Container"
+          DTS:DTSID="{D4616401-B32A-470D-A3B2-3FF95E39EC0D}"
+          DTS:ExecutableType="STOCK:SEQUENCE"
+          DTS:LocaleID="-1"
+          DTS:MaxErrorCount="999999"
+          DTS:ObjectName="SC - Controle Arquivo Importado">
+          <DTS:Variables />
+          <DTS:LoggingOptions
+            DTS:FilterKind="0"
+            DTS:LoggingMode="1">
+            <DTS:Property
+              DTS:DataType="8"
+              DTS:Name="EventFilter">2,7,OnError,12,OnTaskFailed</DTS:Property>
+            <DTS:Property
+              DTS:EventName="OnError"
+              DTS:Name="ColumnFilter">
+              <DTS:Property
+                DTS:Name="Computer">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="Operator">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="SourceName">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="SourceID">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="ExecutionID">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="MessageText">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="DataBytes">-1</DTS:Property>
+            </DTS:Property>
+            <DTS:Property
+              DTS:EventName="OnTaskFailed"
+              DTS:Name="ColumnFilter">
+              <DTS:Property
+                DTS:Name="Computer">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="Operator">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="SourceName">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="SourceID">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="ExecutionID">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="MessageText">-1</DTS:Property>
+              <DTS:Property
+                DTS:Name="DataBytes">-1</DTS:Property>
+            </DTS:Property>
+          </DTS:LoggingOptions>
+          <DTS:Executables>
+            <DTS:Executable
+              DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria"
+              DTS:CreationName="Microsoft.Pipeline"
+              DTS:DelayValidation="True"
+              DTS:Description="Data Flow Task"
+              DTS:DTSID="{D6A28E3E-3B9F-4CC9-A390-350AFC9CD018}"
+              DTS:ExecutableType="Microsoft.Pipeline"
+              DTS:LocaleID="-1"
+              DTS:MaxErrorCount="999999"
+              DTS:ObjectName="DFT - Insere Arquivo na Temporaria"
+              DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="1">
+                <DTS:Property
+                  DTS:DataType="8"
+                  DTS:Name="EventFilter">2,7,OnError,12,OnTaskFailed</DTS:Property>
+                <DTS:Property
+                  DTS:EventName="OnError"
+                  DTS:Name="ColumnFilter">
+                  <DTS:Property
+                    DTS:Name="Computer">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="Operator">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceName">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="ExecutionID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="MessageText">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="DataBytes">-1</DTS:Property>
+                </DTS:Property>
+                <DTS:Property
+                  DTS:EventName="OnTaskFailed"
+                  DTS:Name="ColumnFilter">
+                  <DTS:Property
+                    DTS:Name="Computer">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="Operator">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceName">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="ExecutionID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="MessageText">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="DataBytes">-1</DTS:Property>
+                </DTS:Property>
+              </DTS:LoggingOptions>
+              <DTS:ObjectData>
+                <pipeline
+                  version="1">
+                  <components>
+                    <component
+                      refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS"
+                      componentClassID="Microsoft.FlatFileSource"
+                      contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                      description="Flat File Source"
+                      localeId="1033"
+                      name="FFS - Le arquivo texto SAS"
+                      usesDispositions="true"
+                      version="1">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Specifies whether zero-length columns are treated as null."
+                          name="RetainNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                          name="FileNameColumnName"></property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS.Connections[FlatFileConnection]"
+                          connectionManagerID="Package.ConnectionManagers[arquivo_texto_conn]"
+                          connectionManagerRefId="Package.ConnectionManagers[arquivo_texto_conn]"
+                          name="FlatFileConnection" />
+                      </connections>
+                      <outputs>
+                        <output
+                          refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS.Outputs[Flat File Source Output]"
+                          name="Flat File Source Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS.Outputs[Flat File Source Output].Columns[ColunaUnica]"
+                              codePage="1252"
+                              dataType="str"
+                              errorOrTruncationOperation="Conversion"
+                              errorRowDisposition="FailComponent"
+                              externalMetadataColumnId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS.Outputs[Flat File Source Output].ExternalColumns[ColunaUnica]"
+                              length="1000"
+                              lineageId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS.Outputs[Flat File Source Output].Columns[ColunaUnica]"
+                              name="ColunaUnica"
+                              truncationRowDisposition="FailComponent">
+                              <properties>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                                  name="FastParse">false</property>
+                                <property
+                                  dataType="System.Boolean"
+                                  description="Indicates whether the data is in binary format."
+                                  name="UseBinaryFormat">false</property>
+                              </properties>
+                            </outputColumn>
+                          </outputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS.Outputs[Flat File Source Output].ExternalColumns[ColunaUnica]"
+                              codePage="1252"
+                              dataType="str"
+                              length="1000"
+                              name="ColunaUnica" />
+                          </externalMetadataColumns>
+                        </output>
+                        <output
+                          refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS.Outputs[Flat File Source Error Output]"
+                          isErrorOut="true"
+                          name="Flat File Source Error Output">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                              codePage="1252"
+                              dataType="text"
+                              description="Flat File Source Error Output Column"
+                              lineageId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                              name="Flat File Source Error Output Column" />
+                            <outputColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria"
+                      componentClassID="Microsoft.OLEDBDestination"
+                      contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                      description="OLE DB Destination"
+                      name="OLD - Insere na Temporaria"
+                      usesDispositions="true"
+                      version="4">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                          name="CommandTimeout">0</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of the database object used to open a rowset."
+                          name="OpenRowset">[dbo].[PreImportaSAS]</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the variable that contains the name of the database object used to open a rowset."
+                          name="OpenRowsetVariable"></property>
+                        <property
+                          dataType="System.String"
+                          description="The SQL command to be executed."
+                          name="SqlCommand"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the column code page to use when code page information is unavailable from the data source."
+                          name="DefaultCodePage">1252</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Forces the use of the DefaultCodePage property value when describing character data."
+                          name="AlwaysUseDefaultCodePage">false</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the mode used to access the database."
+                          name="AccessMode"
+                          typeConverter="AccessMode">3</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepIdentity">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                          name="FastLoadKeepNulls">false</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                          name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                          name="FastLoadMaxInsertCommitSize">2147483647</property>
+                      </properties>
+                      <connections>
+                        <connection
+                          refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Connections[OleDbConnection]"
+                          connectionManagerID="{969922B7-FEFD-48E2-8263-4E6A0FBFE28D}:external"
+                          connectionManagerRefId="Project.ConnectionManagers[TempDB]"
+                          description="The OLE DB runtime connection used to access the database."
+                          name="OleDbConnection" />
+                      </connections>
+                      <inputs>
+                        <input
+                          refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Inputs[OLE DB Destination Input]"
+                          errorOrTruncationOperation="Insert"
+                          errorRowDisposition="FailComponent"
+                          hasSideEffects="true"
+                          name="OLE DB Destination Input">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Inputs[OLE DB Destination Input].Columns[tipolinha]"
+                              cachedDataType="ui1"
+                              cachedName="tipolinha"
+                              externalMetadataColumnId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Inputs[OLE DB Destination Input].ExternalColumns[tipolinha]"
+                              lineageId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\SC - Trata linhas.Outputs[Output 0].Columns[tipolinha]" />
+                            <inputColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Inputs[OLE DB Destination Input].Columns[numerolinha]"
+                              cachedDataType="i4"
+                              cachedName="numerolinha"
+                              externalMetadataColumnId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Inputs[OLE DB Destination Input].ExternalColumns[numlinha]"
+                              lineageId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\SC - Trata linhas.Outputs[Output 0].Columns[numerolinha]" />
+                            <inputColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Inputs[OLE DB Destination Input].Columns[numeroconta]"
+                              cachedDataType="i4"
+                              cachedName="numeroconta"
+                              externalMetadataColumnId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Inputs[OLE DB Destination Input].ExternalColumns[numconta]"
+                              lineageId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\SC - Trata linhas.Outputs[Output 0].Columns[numeroconta]" />
+                            <inputColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Inputs[OLE DB Destination Input].Columns[ColunaUnica]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="1000"
+                              cachedName="ColunaUnica"
+                              externalMetadataColumnId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Inputs[OLE DB Destination Input].ExternalColumns[linha]"
+                              lineageId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS.Outputs[Flat File Source Output].Columns[ColunaUnica]" />
+                          </inputColumns>
+                          <externalMetadataColumns
+                            isUsed="True">
+                            <externalMetadataColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Inputs[OLE DB Destination Input].ExternalColumns[numlinha]"
+                              dataType="i4"
+                              name="numlinha" />
+                            <externalMetadataColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Inputs[OLE DB Destination Input].ExternalColumns[numconta]"
+                              dataType="i4"
+                              name="numconta" />
+                            <externalMetadataColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Inputs[OLE DB Destination Input].ExternalColumns[tipolinha]"
+                              dataType="ui1"
+                              name="tipolinha" />
+                            <externalMetadataColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Inputs[OLE DB Destination Input].ExternalColumns[linha]"
+                              codePage="1252"
+                              dataType="str"
+                              length="1000"
+                              name="linha" />
+                          </externalMetadataColumns>
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Outputs[OLE DB Destination Error Output]"
+                          exclusionGroup="1"
+                          isErrorOut="true"
+                          name="OLE DB Destination Error Output"
+                          synchronousInputId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Inputs[OLE DB Destination Input]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              dataType="i4"
+                              lineageId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                              name="ErrorCode"
+                              specialFlags="1" />
+                            <outputColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              dataType="i4"
+                              lineageId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                              name="ErrorColumn"
+                              specialFlags="2" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                    <component
+                      refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\SC - Trata linhas"
+                      componentClassID="Microsoft.ManagedComponentHost"
+                      contactInfo="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum.;Microsoft Corporation; Microsoft SQL Server; Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;10"
+                      description="Includes and runs custom script code. For example, apply a business rule that limits the range of valid values in an &quot;income&quot; column or add values in two columns and calculate the average of the sum."
+                      name="SC - Trata linhas"
+                      version="11">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Stores the source code of the component"
+                          isArray="true"
+                          name="SourceCode"
+                          state="cdata">
+                          <arrayElements
+                            arrayElementCount="30">
+                            <arrayElement
+                              dataType="System.String"><![CDATA[Properties\AssemblyInfo.cs]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("SC_7d4567459d6642ca8ba8e14373332c53")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("SC_7d4567459d6642ca8ba8e14373332c53")]
+[assembly: AssemblyCopyright("Copyright @  2018")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.0.0")]
+]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[Properties\Resources.resx]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[main.cs]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[#region Help:  Introduction to the Script Component
+/* The Script Component allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services data flow.
+ *
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script component. */
+#endregion
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+#endregion
+
+/// <summary>
+/// This is the class to which to add your code.  Do not change the name, attributes, or parent
+/// of this class.
+/// </summary>
+[Microsoft.SqlServer.Dts.Pipeline.SSISScriptComponentEntryPointAttribute]
+public class ScriptMain : UserComponent
+{
+    #region Help:  Using Integration Services variables and parameters
+    /* To use a variable in this script, first ensure that the variable has been added to
+     * either the list contained in the ReadOnlyVariables property or the list contained in
+     * the ReadWriteVariables property of this script component, according to whether or not your
+     * code needs to write into the variable.  To do so, save this script, close this instance of
+     * Visual Studio, and update the ReadOnlyVariables and ReadWriteVariables properties in the
+     * Script Transformation Editor window.
+     * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+     *
+     * Example of reading from a variable or parameter:
+     *  DateTime startTime = Variables.MyStartTime;
+     *
+     * Example of writing to a variable:
+     *  Variables.myStringVariable = "new value";
+     */
+    #endregion
+
+    #region Help:  Using Integration Services Connnection Managers
+    /* Some types of connection managers can be used in this script component.  See the help topic
+     * "Working with Connection Managers Programatically" for details.
+     *
+     * To use a connection manager in this script, first ensure that the connection manager has
+     * been added to either the list of connection managers on the Connection Managers page of the
+     * script component editor.  To add the connection manager, save this script, close this instance of
+     * Visual Studio, and add the Connection Manager to the list.
+     *
+     * If the component needs to hold a connection open while processing rows, override the
+     * AcquireConnections and ReleaseConnections methods.
+     * 
+     * Example of using an ADO.Net connection manager to acquire a SqlConnection:
+     *  object rawConnection = Connections.SalesDB.AcquireConnection(transaction);
+     *  SqlConnection salesDBConn = (SqlConnection)rawConnection;
+     *
+     * Example of using a File connection manager to acquire a file path:
+     *  object rawConnection = Connections.Prices_zip.AcquireConnection(transaction);
+     *  string filePath = (string)rawConnection;
+     *
+     * Example of releasing a connection manager:
+     *  Connections.SalesDB.ReleaseConnection(rawConnection);
+     */
+    #endregion
+
+    #region Help:  Firing Integration Services Events
+    /* This script component can fire events.
+     *
+     * Example of firing an error event:
+     *  ComponentMetaData.FireError(10, "Process Values", "Bad value", "", 0, out cancel);
+     *
+     * Example of firing an information event:
+     *  ComponentMetaData.FireInformation(10, "Process Values", "Processing has started", "", 0, fireAgain);
+     *
+     * Example of firing a warning event:
+     *  ComponentMetaData.FireWarning(10, "Process Values", "No rows were received", "", 0);
+     */
+    #endregion
+
+    /// <summary>
+    /// This method is called once, before rows begin to be processed in the data flow.
+    ///
+    /// You can remove this method if you don't need to do anything here.
+    /// </summary>
+    /// 
+    int row = 0;
+    int nconta = 0;
+
+    public override void PreExecute()
+    {
+        base.PreExecute();
+        row = Variables.numlinha;
+        /*
+         * Add your code here
+         */
+    }
+
+    /// <summary>
+    /// This method is called after all the rows have passed through this component.
+    ///
+    /// You can delete this method if you don't need to do anything here.
+    /// </summary>
+    public override void PostExecute()
+    {
+        base.PostExecute();
+        Variables.numconta = nconta;
+        /*
+         * Add your code here
+         */
+    }
+
+    /// <summary>
+    /// This method is called once for every row that passes through the component from Input0.
+    ///
+    /// Example of reading a value from a column in the the row:
+    ///  string zipCode = Row.ZipCode
+    ///
+    /// Example of writing a value to a column in the row:
+    ///  Row.ZipCode = zipCode
+    /// </summary>
+    /// <param name="Row">The row that is currently passing through the component</param>
+    public override void Input0_ProcessInputRow(Input0Buffer Row)
+    {
+        switch (Row.ColunaUnica.Substring(4, 1).ToString())
+        {
+            case "0":  //Tipo 0: Header Arquivo (1 por Arquivo)
+                Row.tipolinha = 0;
+                Row.numeroconta = 0;
+                break;
+            case "1":  // Tipo 1: Cabeçalho Conta (1 por Conta)
+                Row.tipolinha = 1;
+                nconta++;
+                Row.numeroconta = nconta;
+                break;
+            case "2": // Tipo 2: Item Conta (n por Conta)
+                Row.tipolinha = 2;
+                Row.numeroconta = nconta;
+                break;
+            case "5":  // Tipo 5: MAT Conta (n por Conta)  
+                Row.tipolinha = 5;
+                Row.numeroconta = nconta;
+                break;
+            case "6": // Tipo 6: MED Conta (n por Conta)
+                Row.tipolinha = 6;
+                Row.numeroconta = nconta;
+                break;
+            case "3": // Tipo 3: Total Conta (1 por Conta)
+                Row.tipolinha = 3;
+                Row.numeroconta = nconta;
+                break;
+            case "4": // Tipo 4: Total do Lote (1 para N Contas)
+                Row.tipolinha = 4;
+                Row.numeroconta = nconta;
+                break;
+            case "9": // Tipo 9: Total da Remessa (1 para todas Contas ou 1 por Arquivo)
+                Row.tipolinha = 9;
+                Row.numeroconta = 0;
+                break;
+        }
+        Row.numerolinha = row;
+        row++;
+    }
+
+}
+]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[BufferWrapper.cs]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services buffer wrappers
+*  This module defines classes for accessing data flow buffers
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+
+public class Input0Buffer: ScriptBuffer
+
+{
+    public Input0Buffer(PipelineBuffer Buffer, int[] BufferColumnIndexes, OutputNameMap OutputMap)
+        : base(Buffer, BufferColumnIndexes, OutputMap)
+    {
+    }
+
+    public String ColunaUnica
+    {
+        get
+        {
+            return Buffer.GetString(BufferColumnIndexes[0]);
+        }
+    }
+    public bool ColunaUnica_IsNull
+    {
+        get
+        {
+            return IsNull(0);
+        }
+    }
+
+    public Int32 numerolinha
+    {
+        set
+        {
+            this[1] = value;
+        }
+    }
+    public bool numerolinha_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(1);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Int32 numeroconta
+    {
+        set
+        {
+            this[2] = value;
+        }
+    }
+    public bool numeroconta_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(2);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    public Byte tipolinha
+    {
+        set
+        {
+            this[3] = value;
+        }
+    }
+    public bool tipolinha_IsNull
+    {
+        set
+        {
+            if (value)
+            {
+                SetNull(3);
+            }
+            else
+            {
+                throw new InvalidOperationException("IsNull property cannot be set to False. Assign a value to the column instead.");
+            }
+        }
+    }
+
+    new public bool NextRow()
+    {
+        return base.NextRow();
+    }
+
+    new public bool EndOfRowset()
+    {
+        return base.EndOfRowset();
+    }
+
+}
+]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[ComponentWrapper.cs]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[/* THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT!
+*  Microsoft SQL Server Integration Services component wrapper
+*  This module defines the base class for your component
+*  THIS IS AUTO-GENERATED CODE THAT WILL BE OVERWRITTEN! DO NOT EDIT! */
+
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Pipeline;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+using Microsoft.SqlServer.Dts.Runtime.Wrapper;
+
+public class UserComponent: ScriptComponent
+{
+    public Connections Connections;
+    public Variables Variables;
+    public UserComponent()
+    {
+        Connections = new Connections(this);
+        Variables = new Variables(this);
+    }
+
+    public override void ProcessInput(int InputID, string InputName, PipelineBuffer Buffer, OutputNameMap OutputMap)
+    {
+
+        if (InputName.Equals(@"Input 0", StringComparison.Ordinal))
+        {
+            Input0_ProcessInput(new Input0Buffer(Buffer, GetColumnIndexes(InputID), OutputMap));
+        }
+
+    }
+
+    public virtual void Input0_ProcessInput(Input0Buffer Buffer)
+    {
+        while (Buffer.NextRow())
+        {
+            Input0_ProcessInputRow(Buffer);
+        }
+    }
+
+    public virtual void Input0_ProcessInputRow(Input0Buffer Row)
+    {
+    }
+
+}
+
+public class Connections
+{
+    ScriptComponent ParentComponent;
+
+    public Connections(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+}
+
+public class Variables
+{
+    ScriptComponent ParentComponent;
+
+    public Variables(ScriptComponent Component)
+    {
+        ParentComponent = Component;
+    }
+
+    public Int32 numlinha
+    {
+        get
+        {
+            return (Int32)(ParentComponent.ReadOnlyVariables["num_linha"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+    }
+
+    public Int32 numconta
+    {
+        get
+        {
+            return (Int32)(ParentComponent.ReadWriteVariables["num_conta"].GetValueWithContext(ScriptComponent.EvaluatorContext));
+        }
+        set
+        {
+            ParentComponent.ReadWriteVariables["num_conta"].Value = value;
+        }
+    }
+
+}
+]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[SC_7d4567459d6642ca8ba8e14373332c53.csproj]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{e84c6497-3d69-4b47-a133-330de4dbab5d}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SC_7d4567459d6642ca8ba8e14373332c53</RootNamespace>
+    <AssemblyName>SC_7d4567459d6642ca8ba8e14373332c53</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.TxScript, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSRuntimeWrap, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.DTSPipelineWrap, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.PipelineHost, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Compile Include="main.cs" />
+    <Compile Include="BufferWrapper.cs" />
+    <Compile Include="ComponentWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- This section defines VSTA properties that describe the host-changable project properties. -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="ScriptComponent" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" DebugInfoExeName="" DebugInfoCommandLine="" DebugInfoWorkingDir="" IconImageList="" />
+        <Host Name="ScriptComponent" GeneratedNamespace="SC_7d4567459d6642ca8ba8e14373332c53" IconIndex="0"></Host>
+        <ProjectClient>
+          <HostIdentifier>SSIS_SC140</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[Project]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF16LE]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:CodeName>SC_7d4567459d6642ca8ba8e14373332c53</msb:CodeName>
+		<msb:Language>msBuild</msb:Language>
+		<msb:DisplayName>SC_7d4567459d6642ca8ba8e14373332c53</msb:DisplayName>
+		<msb:ProjectId>{BBA41B85-255B-4232-9B52-B78ABF256462}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="SC_7d4567459d6642ca8ba8e14373332c53.csproj"/>
+		<msb:File Include="Properties\Settings.Designer.cs"/>
+		<msb:File Include="BufferWrapper.cs"/>
+		<msb:File Include="main.cs"/>
+		<msb:File Include="ComponentWrapper.cs"/>
+		<msb:File Include="Properties\Settings.settings"/>
+		<msb:File Include="Properties\AssemblyInfo.cs"/>
+		<msb:File Include="Properties\Resources.resx"/>
+		<msb:File Include="Properties\Resources.Designer.cs"/>
+	</msb:ItemGroup>
+</c:Project>]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[Properties\Settings.Designer.cs]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_7d4567459d6642ca8ba8e14373332c53.Properties.Settings.get_Default():SC_7d4567459d6642ca8ba8e14373332c53.Properties.Sett" +
+    "ings")]
+
+namespace SC_7d4567459d6642ca8ba8e14373332c53.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[Properties\Settings.settings]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[Properties\Resources.Designer.cs]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[UTF8]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_7d4567459d6642ca8ba8e14373332c53.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_7d4567459d6642ca8ba8e14373332c53.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="SC_7d4567459d6642ca8ba8e14373332c53.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace SC_7d4567459d6642ca8ba8e14373332c53.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SC_7d4567459d6642ca8ba8e14373332c53.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}
+]]></arrayElement>
+                          </arrayElements>
+                        </property>
+                        <property
+                          dataType="System.String"
+                          description="Stores the binary representation of the component"
+                          isArray="true"
+                          name="BinaryCode"
+                          state="cdata">
+                          <arrayElements
+                            arrayElementCount="2">
+                            <arrayElement
+                              dataType="System.String"><![CDATA[SC_7d4567459d6642ca8ba8e14373332c53.dll]]></arrayElement>
+                            <arrayElement
+                              dataType="System.String"><![CDATA[TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDAPf0ZFsAAAAAAAAAAOAAIiALATAAABoAAAAIAAAAAAAAxjgA
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAACAAAAAAgAAAAAAAAMAYIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAHQ4AABPAAAAAEAAAEgEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAAzBgAAAAgAAAAGgAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAEgEAAAAQAAAAAYAAAAcAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAIgAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAACo
+OAAAAAAAAEgAAAACAAUAyCQAAPQSAAABAAAAAAAAALw3AAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAGICKBAAAAoCAnsEAAAEbxYAAAZ9AQAABCpiAigRAAAKAnsE
+AAAEAnsCAAAEbxgAAAYqAAATMAMABgIAAAEAABEDbwYAAAYaF28SAAAKbxMAAAoKBiggAAAGCwcg
+HKcMNDU7ByBjogwxNRsHINCgDDA7nwAAAAcgY6IMMTvTAAAAOKYBAAAHIImlDDM7mQAAAAcgHKcM
+NC5SOI4BAAAHIEKqDDY1GAcgr6gMNS4oByBCqgw2O4YAAAA4bgEAAAcg1asMNy46ByC0sww8O5gA
+AAA4VgEAAAZyAQAAcCgUAAAKOpgAAAA4QQEAAAZyBQAAcCgUAAAKOpYAAAA4LAEAAAZyCQAAcCgU
+AAAKOqQAAAA4FwEAAAZyDQAAcCgUAAAKOqQAAAA4AgEAAAZyEQAAcCgUAAAKOqQAAAA47QAAAAZy
+FQAAcCgUAAAKOqQAAAA42AAAAAZyGQAAcCgUAAAKOqQAAAA4wwAAAAZyHQAAcCgUAAAKOqQAAAA4
+rgAAAAMWbwwAAAYDFm8KAAAGOJsAAAADF28MAAAGAgJ7AgAABBdYfQIAAAQDAnsCAAAEbwoAAAYr
+eAMYbwwAAAYDAnsCAAAEbwoAAAYrYwMbbwwAAAYDAnsCAAAEbwoAAAYrTgMcbwwAAAYDAnsCAAAE
+bwoAAAYrOQMZbwwAAAYDAnsCAAAEbwoAAAYrJAMabwwAAAYDAnsCAAAEbwoAAAYrDwMfCW8MAAAG
+AxZvCgAABgMCewEAAARvCAAABgICewEAAAQXWH0BAAAEKh4CKBAAAAYqKgIDBAUoFQAACipSAnsW
+AAAKAnsXAAAKFpRvGAAACioiAhYoGQAACio6AhcDjBsAAAEoGgAACipaAywIAhcoGwAACipyIQAA
+cHMcAAAKejoCGAOMGwAAASgaAAAKKloDLAgCGCgbAAAKKnIhAABwcxwAAAp6OgIZA4wdAAABKBoA
+AAoqWgMsCAIZKBsAAAoqciEAAHBzHAAACnoeAigdAAAKKh4CKB4AAAoqfgIoHwAACgICcxQAAAZ9
+AwAABAICcxUAAAZ9BAAABCqSBHK+AABwGm8gAAAKLBUCBQIDKCEAAAoOBHMFAAAGbxIAAAYqSisH
+AgNvEwAABgNvDgAABi3xKgYqOgIoIgAACgIDfQUAAAQqOgIoIgAACgIDfQYAAAQqlgJ7BgAABG8j
+AAAKcs4AAHBvJAAACiglAAAKbyYAAAqlGwAAASqWAnsGAAAEbycAAApy4gAAcG8kAAAKKCUAAApv
+JgAACqUbAAABKoYCewYAAARvJwAACnLiAABwbyQAAAoDjBsAAAFvKAAACioeAigiAAAKKq5+BwAA
+BC0ecvYAAHDQBwAAAigpAAAKbyoAAApzKwAACoAHAAAEfgcAAAQqGn4IAAAEKh4CgAgAAAQqGn4J
+AAAEKh4CKCwAAAoqLnMeAAAGgAkAAAQqAAAAEzACACwAAAACAAARAiwnIMWdHIEKFgsrFAIHby0A
+AAoGYSCTAQABWgoHF1gLBwJvLgAACjLjBipCU0pCAQABAAAAAAAMAAAAdjQuMC4zMDMxOQAAAAAF
+AGwAAADsBgAAI34AAFgHAAAsCAAAI1N0cmluZ3MAAAAAhA8AAGgBAAAjVVMA7BAAABAAAAAjR1VJ
+RAAAAPwQAAD4AQAAI0Jsb2IAAAAAAAAAAgAAAVcVogEJAQAAAPoBMwAWAAABAAAAJQAAAAkAAAAJ
+AAAAIAAAABUAAAAuAAAAEQAAAAIAAAAEAAAADQAAAA8AAAABAAAABQAAAAEAAAAAAPYDAQAAAAAA
+BgCuAuMFBgBCA+MFBgD6AdAFDwBXBgAABgAnAtoEBgCRAtoEBgByAtoEBgApA9oEBgDOAtoEBgDn
+AtoEBgA+AtoEBgBZAowDCgACA0cBCgB6BUcBDgBrBUcBCgAjBUcBCgBKB0cBBgANB5IEBgDdAdAF
+BgCLBQMGBgAXBcUEEgCtAeADEgAOAuADEgCVAbAEBgDCAeMFBgCyA5IEBgA6AJIEBgDsBJIEBgB3
+A5IEBgAGBZIEFgARAJsFFgABAJsFRwDABwAAFgAiAJsFBgBoAZIEBgAZAZIEBgAXCNoEAAAAAGQA
+AAAAAAEAAQABABAApQQAABAAAQABAAEAEABeBQAAOQADAAUAAQAQACwHAABFAAMAEAABABAA9wYA
+AEkABQAUAAEAEAC4BgAASQAGABUAAAAQAAoGZgZJAAcAGQAAARAA5wZmBmEACQAdAAABAABtAAAA
+SQAKACAAAQAPCLgAAQDpALgABgD3BrsABgC4Br8AAQA6B8MAAQA6B8MAEQCZBMcAEQCFAcsAEQAJ
+Ac8AUCAAAAAAxgBgAwYAAQBpIAAAAADGAGsDBgABAIQgAAAAAMYA8AfTAAEAliIAAAAAhhjDBQYA
+AgCeIgAAAACGGMMFMAACAKkiAAAAAIYIlAAmAAUAviIAAAAAhggeBFIABQDHIgAAAACGCL8AAQAF
+ANYiAAAAAIYISgTZAAYA7SIAAAAAhgjwAAEABwD8IgAAAACGCGEE2QAIABMjAAAAAIYIsQDeAAkA
+IiMAAAAAhgg1BNkACgA5IwAAAACGAAcIUgALAEEjAAAAAIYAFAdSAAsASSMAAAAAhhjDBQYACwBp
+IwAAAADGAJ8H4wALAI4jAAAAAMYBmAfTAA8AoSMAAAAAxgHwB9MAEACjIwAAAACGGMMF7QARALIj
+AAAAAIYYwwXtABIAwSMAAAAAhgikAKIAEwDnIwAAAACGCM8AogATAA0kAAAAAIYI3AABABMALyQA
+AAAAgxjDBQYAFAA3JAAAAACTCIcF8wAUAGMkAAAAAJMIbQH4ABQAaiQAAAAAkwh5Af0AFAByJAAA
+AACWCCAHAwEVAHkkAAAAAIYYwwUGABUAgSQAAAAAkRjJBQgBFQCQJAAAAACTAMMDDAEVAAAAAQAL
+CAAAAQCABQAAAgDCBgAAAwAxBQAAAQCGAwAAAQCGAwAAAQCGAwAAAQCGAwAAAQCGAwAAAQCGAwAA
+AQCMAAAAAgA9AQAAAwCABQAABAAxBQAAAQCABQAAAQALCAAAAQBQBwAAAQBQBwAAAQCGAwAAAQCG
+AwAAAQALBwkAwwUBABEAwwUGABkAwwUKACkAwwUQADEAwwUQADkAwwUQAEEAwwUQAEkAwwUQAFEA
+wwUQAFkAwwUQAGEAwwUQAGkAwwUGAJkAwwUGALkAwwUVAMkAwwUGAIkAYAMGAIkAawMGANEAuQMg
+AJEApgMmANEAIAgqAHEAwwUwAHEAgAU6AHEAwgY+AHkArwNCAHEAcQRHAHEAiQRMAHEAeAQBAOEA
+wwUQAHEABwhSAHEAFAdSAIkAwwUGANEA8AZWAIkA1gZdAJEAwwUGAIkArAZjAPkAgARoAIkA2wdv
+AAEBrAd1AIkAlQZjAAEBfAN8ABkBKwGBABkBEwiKAKEAwwWQAMEAwwUGANEAAwedANEA1QOiAC4A
+CwAwAS4AEwA5AS4AGwBYAS4AIwBhAS4AKwCKAS4AMwCKAS4AOwCKAS4AQwBhAS4ASwCQAS4AUwCK
+AS4AWwCnAUMAYwDxAeMAawDxASEBewDxASMBewDxAWkBcwBYAYkBcwBYARsAmAADAAEABgAJAAcA
+CwAIAA0AAACYABEBAAAiBBUBAADDABkBAABOBBUBAAD0ABkBAABlBBUBAAC1AB0BAAA5BBUBAACo
+ABkBAADgABkBAACLBSEBAACNASYBAAAkBysBAgAGAAMAAgAHAAUAAQAIAAcAAQAJAAkAAQAKAAsA
+AQALAA0AAQAMAA8AAQANABEAAgAWABMAAgAXABUAAQAYABUAAgAaABcAAgAbABkAAQAcABkAAgAd
+ABsABIAAAAEAAAAAAAAAAAAAAAAAQAAAAAQAAAAAAAAAAAAAAKYAAAEAAAAADgAAAAAAAAAAAAAA
+rwBaBwAAAAAOAAAAAAAAAAAAAACvAHcHAAAAAAQAAAAAAAAAAAAAAKYAkgQAAAAADgAAAAAAAAAA
+AAAArwA7BQAAAAAAAAAAAQAAABQGAAAAAABJRFRTVmFyaWFibGUxMDAASURUU1ZhcmlhYmxlczEw
+MABJRFRTRXZhbHVhdG9yQ29udGV4dDEwMABJbnQzMgBTQ183ZDQ1Njc0NTlkNjY0MmNhOGJhOGUx
+NDM3MzMzMmM1MwA8TW9kdWxlPgA8UHJpdmF0ZUltcGxlbWVudGF0aW9uRGV0YWlscz4ASW5wdXRJ
+RABnZXRfQ29sdW5hVW5pY2EAZ2V0X251bWxpbmhhAHNldF90aXBvbGluaGEAc2V0X251bWVyb2xp
+bmhhAGdldF9udW1jb250YQBzZXRfbnVtY29udGEAbmNvbnRhAHNldF9udW1lcm9jb250YQBtc2Nv
+cmxpYgBkZWZhdWx0SW5zdGFuY2UAUnVudGltZVR5cGVIYW5kbGUAR2V0VHlwZUZyb21IYW5kbGUA
+SW5wdXROYW1lAE1pY3Jvc29mdC5TcWxTZXJ2ZXIuRHRzLlBpcGVsaW5lAFR5cGUAZ2V0X0N1bHR1
+cmUAc2V0X0N1bHR1cmUAcmVzb3VyY2VDdWx0dXJlAEFwcGxpY2F0aW9uU2V0dGluZ3NCYXNlAEVk
+aXRvckJyb3dzYWJsZVN0YXRlAENvbXBpbGVyR2VuZXJhdGVkQXR0cmlidXRlAERlYnVnZ2VyTm9u
+VXNlckNvZGVBdHRyaWJ1dGUARGVidWdnYWJsZUF0dHJpYnV0ZQBFZGl0b3JCcm93c2FibGVBdHRy
+aWJ1dGUAQXNzZW1ibHlUaXRsZUF0dHJpYnV0ZQBBc3NlbWJseVRyYWRlbWFya0F0dHJpYnV0ZQBU
+YXJnZXRGcmFtZXdvcmtBdHRyaWJ1dGUAQXNzZW1ibHlDb25maWd1cmF0aW9uQXR0cmlidXRlAEFz
+c2VtYmx5RGVzY3JpcHRpb25BdHRyaWJ1dGUAQ29tcGlsYXRpb25SZWxheGF0aW9uc0F0dHJpYnV0
+ZQBBc3NlbWJseVByb2R1Y3RBdHRyaWJ1dGUAQXNzZW1ibHlDb3B5cmlnaHRBdHRyaWJ1dGUAU1NJ
+U1NjcmlwdENvbXBvbmVudEVudHJ5UG9pbnRBdHRyaWJ1dGUAQXNzZW1ibHlDb21wYW55QXR0cmli
+dXRlAFJ1bnRpbWVDb21wYXRpYmlsaXR5QXR0cmlidXRlAFByZUV4ZWN1dGUAUG9zdEV4ZWN1dGUA
+Qnl0ZQBzZXRfVmFsdWUAdmFsdWUAU3lzdGVtLlJ1bnRpbWUuVmVyc2lvbmluZwBUb1N0cmluZwBH
+ZXRTdHJpbmcAU3Vic3RyaW5nAENvbXB1dGVTdHJpbmdIYXNoAGdldF9MZW5ndGgAU3lzdGVtLkNv
+bXBvbmVudE1vZGVsAFNDXzdkNDU2NzQ1OWQ2NjQyY2E4YmE4ZTE0MzczMzMyYzUzLmRsbABnZXRf
+Q29sdW5hVW5pY2FfSXNOdWxsAHNldF90aXBvbGluaGFfSXNOdWxsAHNldF9udW1lcm9saW5oYV9J
+c051bGwAc2V0X251bWVyb2NvbnRhX0lzTnVsbABTZXROdWxsAGdldF9JdGVtAHNldF9JdGVtAFN5
+c3RlbQByZXNvdXJjZU1hbgBTY3JpcHRNYWluAFN5c3RlbS5Db25maWd1cmF0aW9uAFN5c3RlbS5H
+bG9iYWxpemF0aW9uAFN5c3RlbS5SZWZsZWN0aW9uAEludmFsaWRPcGVyYXRpb25FeGNlcHRpb24A
+U3RyaW5nQ29tcGFyaXNvbgBDdWx0dXJlSW5mbwBPdXRwdXROYW1lTWFwAE91dHB1dE1hcABNaWNy
+b3NvZnQuU3FsU2VydmVyLkRUU1J1bnRpbWVXcmFwAElucHV0MEJ1ZmZlcgBQaXBlbGluZUJ1ZmZl
+cgBTY3JpcHRCdWZmZXIAZ2V0X1Jlc291cmNlTWFuYWdlcgBNaWNyb3NvZnQuU3FsU2VydmVyLkR0
+cy5SdW50aW1lLldyYXBwZXIALmN0b3IALmNjdG9yAFN5c3RlbS5EaWFnbm9zdGljcwBTeXN0ZW0u
+UnVudGltZS5Db21waWxlclNlcnZpY2VzAFN5c3RlbS5SZXNvdXJjZXMAU0NfN2Q0NTY3NDU5ZDY2
+NDJjYThiYThlMTQzNzMzMzJjNTMuUHJvcGVydGllcy5SZXNvdXJjZXMucmVzb3VyY2VzAERlYnVn
+Z2luZ01vZGVzAFNDXzdkNDU2NzQ1OWQ2NjQyY2E4YmE4ZTE0MzczMzMyYzUzLlByb3BlcnRpZXMA
+Z2V0X1JlYWRXcml0ZVZhcmlhYmxlcwBnZXRfUmVhZE9ubHlWYXJpYWJsZXMAQnVmZmVyQ29sdW1u
+SW5kZXhlcwBHZXRDb2x1bW5JbmRleGVzAFNldHRpbmdzAEVxdWFscwBDb25uZWN0aW9ucwBnZXRf
+Q2hhcnMAT2JqZWN0AEVuZE9mUm93c2V0AGdldF9EZWZhdWx0AFVzZXJDb21wb25lbnQAUGFyZW50
+Q29tcG9uZW50AFNjcmlwdENvbXBvbmVudABNaWNyb3NvZnQuU3FsU2VydmVyLlR4U2NyaXB0AE1p
+Y3Jvc29mdC5TcWxTZXJ2ZXIuUGlwZWxpbmVIb3N0AElucHV0MF9Qcm9jZXNzSW5wdXQAR2V0VmFs
+dWVXaXRoQ29udGV4dABTY3JpcHRDb21wb25lbnRFdmFsQ29udGV4dABnZXRfRXZhbHVhdG9yQ29u
+dGV4dABJbnB1dDBfUHJvY2Vzc0lucHV0Um93AE5leHRSb3cAcm93AGdldF9Bc3NlbWJseQBvcF9F
+cXVhbGl0eQAAAzAAAAMxAAADMgAAAzUAAAM2AAADMwAAAzQAAAM5AACAm0kAcwBOAHUAbABsACAA
+cAByAG8AcABlAHIAdAB5ACAAYwBhAG4AbgBvAHQAIABiAGUAIABzAGUAdAAgAHQAbwAgAEYAYQBs
+AHMAZQAuACAAQQBzAHMAaQBnAG4AIABhACAAdgBhAGwAdQBlACAAdABvACAAdABoAGUAIABjAG8A
+bAB1AG0AbgAgAGkAbgBzAHQAZQBhAGQALgAAD0kAbgBwAHUAdAAgADAAABNuAHUAbQBfAGwAaQBu
+AGgAYQAAE24AdQBtAF8AYwBvAG4AdABhAABxUwBDAF8ANwBkADQANQA2ADcANAA1ADkAZAA2ADYA
+NAAyAGMAYQA4AGIAYQA4AGUAMQA0ADMANwAzADMAMwAyAGMANQAzAC4AUAByAG8AcABlAHIAdABp
+AGUAcwAuAFIAZQBzAG8AdQByAGMAZQBzAADQBcOAdwHoQaukEbyR4NAEAAQgAQEIAyAAAQUgAQER
+EQQgAQEOBSABARFZBAcCDgkFIAIOCAgDIAAOBQACAg4OCSADARI9HQgSQQMGEj0DBh0IBCABDggE
+IAECCAUgAgEIHAMgAAIGIAICDhF5BSABHQgIBCAAEn0GIAESgIEcBQAAEoCFBiABHBKAiQQgAQEc
+CAABEoCNEYCRBSAAEoCVByACAQ4SgJUEBwIJCAQgAQMIAyAACAi3elxWGTTgiQiJhF3NgIDMkQIG
+CAMGEhQDBhIYAwYSRQMGElEDBhJVAwYSIAUgAQESDAQgAQECBCABAQUJIAQBCA4SPRJBBSABARJF
+BAAAElEEAAASVQUAAQESVQQAABIgAwAAAQQAAQkOAygADgMoAAIDKAAIAygABQQIABJRBAgAElUE
+CAASIAgBAAgAAAAAAB4BAAEAVAIWV3JhcE5vbkV4Y2VwdGlvblRocm93cwEIAQACAAAAAAAoAQAj
+U0NfN2Q0NTY3NDU5ZDY2NDJjYThiYThlMTQzNzMzMzJjNTMAAAUBAAAAABYBABFDb3B5cmlnaHQg
+QCAgMjAxOAAASQEAGi5ORVRGcmFtZXdvcmssVmVyc2lvbj12NC41AQBUDhRGcmFtZXdvcmtEaXNw
+bGF5TmFtZRIuTkVUIEZyYW1ld29yayA0LjUEAQAAAAAAtAAAAM7K774BAAAAkQAAAGxTeXN0ZW0u
+UmVzb3VyY2VzLlJlc291cmNlUmVhZGVyLCBtc2NvcmxpYiwgVmVyc2lvbj00LjAuMC4wLCBDdWx0
+dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkjU3lzdGVtLlJlc291
+cmNlcy5SdW50aW1lUmVzb3VyY2VTZXQCAAAAAAAAAAAAAABQQURQQURQtAAAAJw4AAAAAAAAAAAA
+ALY4AAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAACoOAAAAAAAAAAAAAAAAF9Db3JEbGxNYWluAG1z
+Y29yZWUuZGxsAAAAAAD/JQAgABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AQAQAAAAGAAAgAAAAAAAAAAAAAAAAAAAAQABAAAAMAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAASAAA
+AFhAAADsAwAAAAAAAAAAAADsAzQAAABWAFMAXwBWAEUAUgBTAEkATwBOAF8ASQBOAEYATwAAAAAA
+vQTv/gAAAQAAAAEAAAAAAAAAAQAAAAAAPwAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAAEQAAAAB
+AFYAYQByAEYAaQBsAGUASQBuAGYAbwAAAAAAJAAEAAAAVAByAGEAbgBzAGwAYQB0AGkAbwBuAAAA
+AAAAALAETAMAAAEAUwB0AHIAaQBuAGcARgBpAGwAZQBJAG4AZgBvAAAAKAMAAAEAMAAwADAAMAAw
+ADQAYgAwAAAAGgABAAEAQwBvAG0AbQBlAG4AdABzAAAAAAAAACIAAQABAEMAbwBtAHAAYQBuAHkA
+TgBhAG0AZQAAAAAAAAAAAHAAJAABAEYAaQBsAGUARABlAHMAYwByAGkAcAB0AGkAbwBuAAAAAABT
+AEMAXwA3AGQANAA1ADYANwA0ADUAOQBkADYANgA0ADIAYwBhADgAYgBhADgAZQAxADQAMwA3ADMA
+MwAzADIAYwA1ADMAAAAwAAgAAQBGAGkAbABlAFYAZQByAHMAaQBvAG4AAAAAADEALgAwAC4AMAAu
+ADAAAABwACgAAQBJAG4AdABlAHIAbgBhAGwATgBhAG0AZQAAAFMAQwBfADcAZAA0ADUANgA3ADQA
+NQA5AGQANgA2ADQAMgBjAGEAOABiAGEAOABlADEANAAzADcAMwAzADMAMgBjADUAMwAuAGQAbABs
+AAAASAASAAEATABlAGcAYQBsAEMAbwBwAHkAcgBpAGcAaAB0AAAAQwBvAHAAeQByAGkAZwBoAHQA
+IABAACAAIAAyADAAMQA4AAAAKgABAAEATABlAGcAYQBsAFQAcgBhAGQAZQBtAGEAcgBrAHMAAAAA
+AAAAAAB4ACgAAQBPAHIAaQBnAGkAbgBhAGwARgBpAGwAZQBuAGEAbQBlAAAAUwBDAF8ANwBkADQA
+NQA2ADcANAA1ADkAZAA2ADYANAAyAGMAYQA4AGIAYQA4AGUAMQA0ADMANwAzADMAMwAyAGMANQAz
+AC4AZABsAGwAAABoACQAAQBQAHIAbwBkAHUAYwB0AE4AYQBtAGUAAAAAAFMAQwBfADcAZAA0ADUA
+NgA3ADQANQA5AGQANgA2ADQAMgBjAGEAOABiAGEAOABlADEANAAzADcAMwAzADMAMgBjADUAMwAA
+ADQACAABAFAAcgBvAGQAdQBjAHQAVgBlAHIAcwBpAG8AbgAAADEALgAwAC4AMAAuADAAAAA4AAgA
+AQBBAHMAcwBlAG0AYgBsAHkAIABWAGUAcgBzAGkAbwBuAAAAMQAuADAALgAwAC4AMAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAMAAAAyDgAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA]]></arrayElement>
+                          </arrayElements>
+                        </property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the name of the Microsoft Visual Studio Tools for Applications project. Project names must be unique within a package."
+                          name="VSTAProjectName"
+                          typeConverter="NOTBROWSABLE">SC_7d4567459d6642ca8ba8e14373332c53</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the programming language used by the script."
+                          name="ScriptLanguage"
+                          typeConverter="Microsoft.SqlServer.VSTAHosting.ScriptingLanguages">CSharp</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a comma-separated list of read-only variables."
+                          name="ReadOnlyVariables"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIVariablePickerDlg">User::num_linha</property>
+                        <property
+                          dataType="System.String"
+                          description="Specifies a comma-separated list of read/write variables."
+                          name="ReadWriteVariables"
+                          UITypeEditor="Microsoft.DataTransformationServices.Controls.ScriptUIWriteableVariablePickerDlg">User::num_conta</property>
+                        <property
+                          dataType="System.String"
+                          description="List of breakpoints present on the script."
+                          isArray="true"
+                          name="BreakpointCollection"
+                          typeConverter="NOTBROWSABLE">
+                          <arrayElements
+                            arrayElementCount="0" />
+                        </property>
+                        <property
+                          dataType="System.String"
+                          description="Checksum to match component metedata against compiled codes."
+                          name="MetadataChecksum"
+                          typeConverter="NOTBROWSABLE">f7e48c2c75a7d24fe7a3fac6ad17938a</property>
+                        <property
+                          dataType="System.String"
+                          description="Checksum to match component metedata against compiled codes."
+                          name="MetadataShaChecksum"
+                          typeConverter="NOTBROWSABLE">2e19c2d18273a5d237bd064999871634ce47752d</property>
+                        <property
+                          dataType="System.String"
+                          name="UserComponentTypeName">Microsoft.ScriptComponentHost</property>
+                        <property
+                          dataType="System.String"
+                          description="Checksum to match component metedata against compiled codes."
+                          name="MetadataChecksum140"
+                          typeConverter="NOTBROWSABLE">75</property>
+                      </properties>
+                      <inputs>
+                        <input
+                          refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\SC - Trata linhas.Inputs[Input 0]"
+                          hasSideEffects="true"
+                          name="Input 0">
+                          <inputColumns>
+                            <inputColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\SC - Trata linhas.Inputs[Input 0].Columns[ColunaUnica]"
+                              cachedCodepage="1252"
+                              cachedDataType="str"
+                              cachedLength="1000"
+                              cachedName="ColunaUnica"
+                              lineageId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS.Outputs[Flat File Source Output].Columns[ColunaUnica]" />
+                          </inputColumns>
+                          <externalMetadataColumns />
+                        </input>
+                      </inputs>
+                      <outputs>
+                        <output
+                          refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\SC - Trata linhas.Outputs[Output 0]"
+                          name="Output 0"
+                          synchronousInputId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\SC - Trata linhas.Inputs[Input 0]">
+                          <outputColumns>
+                            <outputColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\SC - Trata linhas.Outputs[Output 0].Columns[numerolinha]"
+                              dataType="i4"
+                              lineageId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\SC - Trata linhas.Outputs[Output 0].Columns[numerolinha]"
+                              name="numerolinha" />
+                            <outputColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\SC - Trata linhas.Outputs[Output 0].Columns[numeroconta]"
+                              dataType="i4"
+                              lineageId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\SC - Trata linhas.Outputs[Output 0].Columns[numeroconta]"
+                              name="numeroconta" />
+                            <outputColumn
+                              refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\SC - Trata linhas.Outputs[Output 0].Columns[tipolinha]"
+                              dataType="ui1"
+                              lineageId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\SC - Trata linhas.Outputs[Output 0].Columns[tipolinha]"
+                              name="tipolinha" />
+                          </outputColumns>
+                          <externalMetadataColumns />
+                        </output>
+                      </outputs>
+                    </component>
+                  </components>
+                  <paths>
+                    <path
+                      refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria.Paths[Flat File Source Output]"
+                      endId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\SC - Trata linhas.Inputs[Input 0]"
+                      name="Flat File Source Output"
+                      startId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS.Outputs[Flat File Source Output]" />
+                    <path
+                      refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria.Paths[Output 0]"
+                      endId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria.Inputs[OLE DB Destination Input]"
+                      name="Output 0"
+                      startId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\SC - Trata linhas.Outputs[Output 0]" />
+                  </paths>
+                </pipeline>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\EST  - Quantidade de Linhas"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{DD5D069D-5A01-4872-AE74-94C32EE0EE8A}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:MaxErrorCount="999999"
+              DTS:ObjectName="EST  - Quantidade de Linhas"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="1">
+                <DTS:Property
+                  DTS:DataType="8"
+                  DTS:Name="EventFilter">2,7,OnError,12,OnTaskFailed</DTS:Property>
+                <DTS:Property
+                  DTS:EventName="OnError"
+                  DTS:Name="ColumnFilter">
+                  <DTS:Property
+                    DTS:Name="Computer">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="Operator">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceName">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="ExecutionID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="MessageText">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="DataBytes">-1</DTS:Property>
+                </DTS:Property>
+                <DTS:Property
+                  DTS:EventName="OnTaskFailed"
+                  DTS:Name="ColumnFilter">
+                  <DTS:Property
+                    DTS:Name="Computer">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="Operator">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceName">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="ExecutionID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="MessageText">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="DataBytes">-1</DTS:Property>
+                </DTS:Property>
+              </DTS:LoggingOptions>
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{969922B7-FEFD-48E2-8263-4E6A0FBFE28D}"
+                  SQLTask:SqlStatementSource="SELECT count(*) from tempdb.dbo.PreImportaSAS"
+                  SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="0"
+                    SQLTask:DtsVariableName="User::qtdLInhas" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\EST - Cria Tabela Temporaria"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{414C5E64-B5B0-46D1-967A-DF93A95036FB}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:MaxErrorCount="999999"
+              DTS:ObjectName="EST - Cria Tabela Temporaria"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="1">
+                <DTS:Property
+                  DTS:DataType="8"
+                  DTS:Name="EventFilter">2,7,OnError,12,OnTaskFailed</DTS:Property>
+                <DTS:Property
+                  DTS:EventName="OnError"
+                  DTS:Name="ColumnFilter">
+                  <DTS:Property
+                    DTS:Name="Computer">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="Operator">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceName">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="ExecutionID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="MessageText">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="DataBytes">-1</DTS:Property>
+                </DTS:Property>
+                <DTS:Property
+                  DTS:EventName="OnTaskFailed"
+                  DTS:Name="ColumnFilter">
+                  <DTS:Property
+                    DTS:Name="Computer">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="Operator">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceName">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="ExecutionID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="MessageText">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="DataBytes">-1</DTS:Property>
+                </DTS:Property>
+              </DTS:LoggingOptions>
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{A34749F2-000E-463F-90D6-EBE71AFF7AAA}"
+                  SQLTask:SqlStatementSource="ctrl.lsp_PreImportaSAS" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\EST - Info Arquivo na tabela IMPORTACAO"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{198AB435-15E9-444E-8F4C-38D21EE014BB}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:MaxErrorCount="999999"
+              DTS:ObjectName="EST - Info Arquivo na tabela IMPORTACAO"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="1">
+                <DTS:Property
+                  DTS:DataType="8"
+                  DTS:Name="EventFilter">2,7,OnError,12,OnTaskFailed</DTS:Property>
+                <DTS:Property
+                  DTS:EventName="OnError"
+                  DTS:Name="ColumnFilter">
+                  <DTS:Property
+                    DTS:Name="Computer">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="Operator">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceName">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="ExecutionID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="MessageText">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="DataBytes">-1</DTS:Property>
+                </DTS:Property>
+                <DTS:Property
+                  DTS:EventName="OnTaskFailed"
+                  DTS:Name="ColumnFilter">
+                  <DTS:Property
+                    DTS:Name="Computer">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="Operator">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceName">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="ExecutionID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="MessageText">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="DataBytes">-1</DTS:Property>
+                </DTS:Property>
+              </DTS:LoggingOptions>
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{A34749F2-000E-463F-90D6-EBE71AFF7AAA}"
+                  SQLTask:SqlStatementSource="ctrl.lsp_InsereArquivo ?,?,?,?,?,'org',? output" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="0"
+                    SQLTask:DtsVariableName="User::arquivo_txt_nome"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="1"
+                    SQLTask:DtsVariableName="User::fqn"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="2"
+                    SQLTask:DtsVariableName="User::arquivo_txt_tamanho"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="129"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="3"
+                    SQLTask:DtsVariableName="User::qtdLInhas"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="4"
+                    SQLTask:DtsVariableName="User::qtdContas"
+                    SQLTask:ParameterDirection="Input"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                  <SQLTask:ParameterBinding
+                    SQLTask:ParameterName="5"
+                    SQLTask:DtsVariableName="User::ArqID"
+                    SQLTask:ParameterDirection="Output"
+                    SQLTask:DataType="3"
+                    SQLTask:ParameterSize="-1" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\EST - Quantidade de Contas"
+              DTS:CreationName="Microsoft.ExecuteSQLTask"
+              DTS:Description="Execute SQL Task"
+              DTS:DTSID="{7697DCC6-DF8F-41B9-AC80-CB520D75D2A5}"
+              DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+              DTS:LocaleID="-1"
+              DTS:MaxErrorCount="999999"
+              DTS:ObjectName="EST - Quantidade de Contas"
+              DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="1">
+                <DTS:Property
+                  DTS:DataType="8"
+                  DTS:Name="EventFilter">2,7,OnError,12,OnTaskFailed</DTS:Property>
+                <DTS:Property
+                  DTS:EventName="OnError"
+                  DTS:Name="ColumnFilter">
+                  <DTS:Property
+                    DTS:Name="Computer">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="Operator">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceName">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="ExecutionID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="MessageText">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="DataBytes">-1</DTS:Property>
+                </DTS:Property>
+                <DTS:Property
+                  DTS:EventName="OnTaskFailed"
+                  DTS:Name="ColumnFilter">
+                  <DTS:Property
+                    DTS:Name="Computer">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="Operator">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceName">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="ExecutionID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="MessageText">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="DataBytes">-1</DTS:Property>
+                </DTS:Property>
+              </DTS:LoggingOptions>
+              <DTS:ObjectData>
+                <SQLTask:SqlTaskData
+                  SQLTask:Connection="{969922B7-FEFD-48E2-8263-4E6A0FBFE28D}"
+                  SQLTask:SqlStatementSource="SELECT MAX(numconta) FROM tempdb.dbo.PreImportaSAS"
+                  SQLTask:ResultType="ResultSetType_SingleRow" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+                  <SQLTask:ResultBinding
+                    SQLTask:ResultName="0"
+                    SQLTask:DtsVariableName="User::qtdContas" />
+                </SQLTask:SqlTaskData>
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\ET - Reinicia Numero Linha"
+              DTS:CreationName="Microsoft.ExpressionTask"
+              DTS:Description="Expression Task"
+              DTS:DTSID="{730C2C95-E1F8-42F0-BD93-30A85AE3B81A}"
+              DTS:ExecutableType="Microsoft.ExpressionTask"
+              DTS:LocaleID="-1"
+              DTS:MaxErrorCount="999999"
+              DTS:ObjectName="ET - Reinicia Numero Linha"
+              DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2016; © 2015 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="1">
+                <DTS:Property
+                  DTS:DataType="8"
+                  DTS:Name="EventFilter">2,7,OnError,12,OnTaskFailed</DTS:Property>
+                <DTS:Property
+                  DTS:EventName="OnError"
+                  DTS:Name="ColumnFilter">
+                  <DTS:Property
+                    DTS:Name="Computer">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="Operator">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceName">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="ExecutionID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="MessageText">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="DataBytes">-1</DTS:Property>
+                </DTS:Property>
+                <DTS:Property
+                  DTS:EventName="OnTaskFailed"
+                  DTS:Name="ColumnFilter">
+                  <DTS:Property
+                    DTS:Name="Computer">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="Operator">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceName">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="ExecutionID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="MessageText">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="DataBytes">-1</DTS:Property>
+                </DTS:Property>
+              </DTS:LoggingOptions>
+              <DTS:ObjectData>
+                <ExpressionTask
+                  Expression="@[User::num_linha] = 1" />
+              </DTS:ObjectData>
+            </DTS:Executable>
+            <DTS:Executable
+              DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\ST-File Info"
+              DTS:CreationName="Microsoft.ScriptTask"
+              DTS:Description="Script Task"
+              DTS:DTSID="{A3B71EF4-23EF-4A8C-A01B-B15AA9658188}"
+              DTS:ExecutableType="Microsoft.ScriptTask"
+              DTS:LocaleID="-1"
+              DTS:MaxErrorCount="999999"
+              DTS:ObjectName="ST-File Info"
+              DTS:ThreadHint="0">
+              <DTS:Variables />
+              <DTS:LoggingOptions
+                DTS:FilterKind="0"
+                DTS:LoggingMode="1">
+                <DTS:Property
+                  DTS:DataType="8"
+                  DTS:Name="EventFilter">2,7,OnError,12,OnTaskFailed</DTS:Property>
+                <DTS:Property
+                  DTS:EventName="OnError"
+                  DTS:Name="ColumnFilter">
+                  <DTS:Property
+                    DTS:Name="Computer">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="Operator">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceName">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="ExecutionID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="MessageText">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="DataBytes">-1</DTS:Property>
+                </DTS:Property>
+                <DTS:Property
+                  DTS:EventName="OnTaskFailed"
+                  DTS:Name="ColumnFilter">
+                  <DTS:Property
+                    DTS:Name="Computer">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="Operator">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceName">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="SourceID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="ExecutionID">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="MessageText">-1</DTS:Property>
+                  <DTS:Property
+                    DTS:Name="DataBytes">-1</DTS:Property>
+                </DTS:Property>
+              </DTS:LoggingOptions>
+              <DTS:ObjectData>
+                <ScriptProject
+                  Name="ST_ce11b2030ff842d597e70d3713f8361e"
+                  VSTAMajorVersion="15"
+                  VSTAMinorVersion="0"
+                  Language="CSharp"
+                  ReadOnlyVariables="User::fqn"
+                  ReadWriteVariables="User::arquivo_txt_nome,User::arquivo_txt_tamanho">
+                  <ProjectItem
+                    Name="Properties\Settings.settings"
+                    Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
+                  <ProjectItem
+                    Name="Properties\Resources.resx"
+                    Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+</root>]]></ProjectItem>
+                  <ProjectItem
+                    Name="ST_ce11b2030ff842d597e70d3713f8361e.csproj"
+                    Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectTypeGuids>{30D016F9-3734-4E33-A861-5E7D899E18F3};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{761b3266-dc25-43a8-aa62-e00ee996d030}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ST_ce11b2030ff842d597e70d3713f8361e</RootNamespace>
+    <AssemblyName>ST_ce11b2030ff842d597e70d3713f8361e</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>true</ResolveAssemblyReferenceIgnoreTargetFrameworkAttributeVersionMismatch>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.SqlServer.ManagedDTS, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.SqlServer.ScriptTask, Version=14.0.0.0, Culture=Neutral, PublicKeyToken=89845dcd8080cc91" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppDesigner Include="Properties\" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ScriptMain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <!-- Include the build rules for a C# project.-->
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{30D016F9-3734-4E33-A861-5E7D899E18F3}">
+        <ProjectProperties HostName="ScriptTask" HostPackage="{B3A685AA-7EAF-4BC6-9940-57959FA5AC07}" ApplicationType="usd" Language="cs" TemplatesPath="" DebugInfoCommandLine="" DebugInfoWorkingDir="" IconImageList="" />
+        <Host Name="ScriptTask" GeneratedNamespace="$safeprojectname" IconIndex=""></Host>
+        <ProjectClient>
+          <HostIdentifier>SSIS_ST140</HostIdentifier>
+        </ProjectClient>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>]]></ProjectItem>
+                  <ProjectItem
+                    Name="ScriptMain.cs"
+                    Encoding="UTF8"><![CDATA[#region Help:  Introduction to the script task
+/* The Script Task allows you to perform virtually any operation that can be accomplished in
+ * a .Net application within the context of an Integration Services control flow. 
+ * 
+ * Expand the other regions which have "Help" prefixes for examples of specific ways to use
+ * Integration Services features within this script task. */
+#endregion
+
+
+#region Namespaces
+using System;
+using System.Data;
+using Microsoft.SqlServer.Dts.Runtime;
+using System.Windows.Forms;
+using System.IO;
+#endregion
+
+namespace ST_ce11b2030ff842d597e70d3713f8361e
+{
+    /// <summary>
+    /// ScriptMain is the entry point class of the script.  Do not change the name, attributes,
+    /// or parent of this class.
+    /// </summary>
+	[Microsoft.SqlServer.Dts.Tasks.ScriptTask.SSISScriptTaskEntryPointAttribute]
+	public partial class ScriptMain : Microsoft.SqlServer.Dts.Tasks.ScriptTask.VSTARTScriptObjectModelBase
+	{
+        #region Help:  Using Integration Services variables and parameters in a script
+        /* To use a variable in this script, first ensure that the variable has been added to 
+         * either the list contained in the ReadOnlyVariables property or the list contained in 
+         * the ReadWriteVariables property of this script task, according to whether or not your
+         * code needs to write to the variable.  To add the variable, save this script, close this instance of
+         * Visual Studio, and update the ReadOnlyVariables and 
+         * ReadWriteVariables properties in the Script Transformation Editor window.
+         * To use a parameter in this script, follow the same steps. Parameters are always read-only.
+         * 
+         * Example of reading from a variable:
+         *  DateTime startTime = (DateTime) Dts.Variables["System::StartTime"].Value;
+         * 
+         * Example of writing to a variable:
+         *  Dts.Variables["User::myStringVariable"].Value = "new value";
+         * 
+         * Example of reading from a package parameter:
+         *  int batchId = (int) Dts.Variables["$Package::batchId"].Value;
+         *  
+         * Example of reading from a project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].Value;
+         * 
+         * Example of reading from a sensitive project parameter:
+         *  int batchId = (int) Dts.Variables["$Project::batchId"].GetSensitiveValue();
+         * */
+
+        #endregion
+
+        #region Help:  Firing Integration Services events from a script
+        /* This script task can fire events for logging purposes.
+         * 
+         * Example of firing an error event:
+         *  Dts.Events.FireError(18, "Process Values", "Bad value", "", 0);
+         * 
+         * Example of firing an information event:
+         *  Dts.Events.FireInformation(3, "Process Values", "Processing has started", "", 0, ref fireAgain)
+         * 
+         * Example of firing a warning event:
+         *  Dts.Events.FireWarning(14, "Process Values", "No values received for input", "", 0);
+         * */
+        #endregion
+
+        #region Help:  Using Integration Services connection managers in a script
+        /* Some types of connection managers can be used in this script task.  See the topic 
+         * "Working with Connection Managers Programatically" for details.
+         * 
+         * Example of using an ADO.Net connection manager:
+         *  object rawConnection = Dts.Connections["Sales DB"].AcquireConnection(Dts.Transaction);
+         *  SqlConnection myADONETConnection = (SqlConnection)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Sales DB"].ReleaseConnection(rawConnection);
+         *
+         * Example of using a File connection manager
+         *  object rawConnection = Dts.Connections["Prices.zip"].AcquireConnection(Dts.Transaction);
+         *  string filePath = (string)rawConnection;
+         *  //Use the connection in some code here, then release the connection
+         *  Dts.Connections["Prices.zip"].ReleaseConnection(rawConnection);
+         * */
+        #endregion
+
+
+		/// <summary>
+        /// This method is called when this script task executes in the control flow.
+        /// Before returning from this method, set the value of Dts.TaskResult to indicate success or failure.
+        /// To open Help, press F1.
+        /// </summary>
+		public void Main()
+		{
+            // TODO: Add your code here
+            FileInfo oFileInfo;
+
+            oFileInfo = new FileInfo(Dts.Variables["User::fqn"].Value.ToString());
+
+            Dts.Variables["User::arquivo_txt_nome"].Value = oFileInfo.Name.ToString();
+            if (oFileInfo.Length > 0)
+            {
+                Dts.Variables["User::arquivo_txt_tamanho"].Value = oFileInfo.Length.ToString("#,#") + " Bytes";
+
+            }
+            else
+            {
+                Dts.Variables["User::arquivo_txt_tamanho"].Value = oFileInfo.Length.ToString("0 Bytes");
+
+            }
+
+            Dts.TaskResult = (int)ScriptResults.Success;
+        }
+
+        #region ScriptResults declaration
+        /// <summary>
+        /// This enum provides a convenient shorthand within the scope of this class for setting the
+        /// result of the script.
+        /// 
+        /// This code was generated automatically.
+        /// </summary>
+        enum ScriptResults
+        {
+            Success = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Success,
+            Failure = Microsoft.SqlServer.Dts.Runtime.DTSExecResult.Failure
+        };
+        #endregion
+
+	}
+}]]></ProjectItem>
+                  <ProjectItem
+                    Name="Project"
+                    Encoding="UTF16LE"><![CDATA[<?xml version="1.0" encoding="UTF-16" standalone="yes"?>
+<c:Project xmlns:c="http://schemas.microsoft.com/codeprojectml/2010/08/main" xmlns:msb="http://schemas.microsoft.com/developer/msbuild/2003" runtimeVersion="4.0" schemaVersion="1.0">
+	<msb:PropertyGroup>
+		<msb:CodeName>ST_ce11b2030ff842d597e70d3713f8361e</msb:CodeName>
+		<msb:Language>msBuild</msb:Language>
+		<msb:DisplayName>ST_ce11b2030ff842d597e70d3713f8361e</msb:DisplayName>
+		<msb:ProjectId>{FCE18416-5B8C-4699-AA98-59F829132DBB}</msb:ProjectId>
+	</msb:PropertyGroup>
+	<msb:ItemGroup>
+		<msb:Project Include="ST_ce11b2030ff842d597e70d3713f8361e.csproj"/>
+		<msb:File Include="Properties\Settings.settings"/>
+		<msb:File Include="Properties\AssemblyInfo.cs"/>
+		<msb:File Include="Properties\Resources.resx"/>
+		<msb:File Include="Properties\Resources.Designer.cs"/>
+		<msb:File Include="Properties\Settings.Designer.cs"/>
+		<msb:File Include="ScriptMain.cs"/>
+	</msb:ItemGroup>
+</c:Project>]]></ProjectItem>
+                  <ProjectItem
+                    Name="Properties\Settings.Designer.cs"
+                    Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_ce11b2030ff842d597e70d3713f8361e.Properties.Settings.get_Default():ST_ce11b2030ff842d597e70d3713f8361e.Properties.Sett" +
+    "ings")]
+
+namespace ST_ce11b2030ff842d597e70d3713f8361e.Properties {
+    
+    
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
+        [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        private static Settings defaultInstance = new Settings();
+        
+        public static Settings Default {
+            get {
+                return defaultInstance;
+            }
+        }
+    }
+}]]></ProjectItem>
+                  <ProjectItem
+                    Name="Properties\AssemblyInfo.cs"
+                    Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_ce11b2030ff842d597e70d3713f8361e")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_ce11b2030ff842d597e70d3713f8361e")]
+[assembly: AssemblyCopyright("Copyright @  2018")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+                  <ProjectItem
+                    Name="Properties\Resources.Designer.cs"
+                    Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
+// <auto-generated>
+//     This code was generated by a tool.
+//
+//     Changes to this file may cause incorrect behavior and will be lost if
+//     the code is regenerated.
+// </auto-generated>
+//------------------------------------------------------------------------------
+
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_ce11b2030ff842d597e70d3713f8361e.Properties.Resources.get_ResourceManager():System.Resources.Resou" +
+    "rceManager")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_ce11b2030ff842d597e70d3713f8361e.Properties.Resources.get_Culture():System.Globalization.CultureIn" +
+    "fo")]
+[assembly: global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Scope="member", Target="ST_ce11b2030ff842d597e70d3713f8361e.Properties.Resources.set_Culture(System.Globalization.CultureInfo" +
+    "):Void")]
+
+namespace ST_ce11b2030ff842d597e70d3713f8361e.Properties {
+    
+    
+    /// <summary>
+    ///   A strongly-typed resource class, for looking up localized strings, etc.
+    /// </summary>
+    // This class was auto-generated by the StronglyTypedResourceBuilder
+    // class via a tool like ResGen or Visual Studio.
+    // To add or remove a member, edit your .ResX file then rerun ResGen
+    // with the /str option, or rebuild your VS project.
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    internal class Resources {
+        
+        private static global::System.Resources.ResourceManager resourceMan;
+        
+        private static global::System.Globalization.CultureInfo resourceCulture;
+        
+        [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        internal Resources() {
+        }
+        
+        /// <summary>
+        ///   Returns the cached ResourceManager instance used by this class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if ((resourceMan == null)) {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ST_ce11b2030ff842d597e70d3713f8361e.Properties.Resources", typeof(Resources).Assembly);
+                    resourceMan = temp;
+                }
+                return resourceMan;
+            }
+        }
+        
+        /// <summary>
+        ///   Overrides the current thread's CurrentUICulture property for all
+        ///   resource lookups using this strongly typed resource class.
+        /// </summary>
+        [global::System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        internal static global::System.Globalization.CultureInfo Culture {
+            get {
+                return resourceCulture;
+            }
+            set {
+                resourceCulture = value;
+            }
+        }
+    }
+}]]></ProjectItem>
+                  <BinaryItem
+                    Name="ST_ce11b2030ff842d597e70d3713f8361e.dll">TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAgAAAAA4fug4AtAnNIbgBTM0hVGhpcyBwcm9ncmFtIGNhbm5vdCBiZSBydW4gaW4gRE9TIG1v
+ZGUuDQ0KJAAAAAAAAABQRQAATAEDALjAa1sAAAAAAAAAAOAAIiALATAAABAAAAAIAAAAAAAAPi8A
+AAAgAAAAQAAAAAAAEAAgAAAAAgAABAAAAAAAAAAGAAAAAAAAAACAAAAAAgAAAAAAAAMAYIUAABAA
+ABAAAAAAEAAAEAAAAAAAABAAAAAAAAAAAAAAAOwuAABPAAAAAEAAAGwEAAAAAAAAAAAAAAAAAAAA
+AAAAAGAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAIAAACAAAAAAAAAAAAAAACCAAAEgAAAAAAAAAAAAAAC50ZXh0AAAARA8AAAAgAAAAEAAAAAIA
+AAAAAAAAAAAAAAAAACAAAGAucnNyYwAAAGwEAAAAQAAAAAYAAAASAAAAAAAAAAAAAAAAAABAAABA
+LnJlbG9jAAAMAAAAAGAAAAACAAAAGAAAAAAAAAAAAAAAAAAAQAAAQgAAAAAAAAAAAAAAAAAAAAAg
+LwAAAAAAAEgAAAACAAUAjCEAAKgMAAABAAAAAAAAADQuAAC4AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAABMwAwDHAAAAAQAAEQIoEAAACm8RAAAKcgEAAHBvEgAACm8T
+AAAKbxQAAApzFQAACgoCKBAAAApvEQAACnIVAABwbxIAAAoGbxYAAApvFAAACm8XAAAKBm8YAAAK
+FmoxOQIoEAAACm8RAAAKckMAAHBvEgAACgZvGAAACgsSAXJ3AABwKBkAAApyfwAAcCgaAAAKbxcA
+AAorLQIoEAAACm8RAAAKckMAAHBvEgAACgZvGAAACgsSAXKNAABwKBkAAApvFwAACgIoEAAAChZv
+GwAACioeAigcAAAKKh4CKB0AAAoqrn4BAAAELR5ynQAAcNADAAACKB4AAApvHwAACnMgAAAKgAEA
+AAR+AQAABCoafgIAAAQqHgKAAgAABCoafgMAAAQqHgIoIQAACioucwgAAAaAAwAABCoAAABCU0pC
+AQABAAAAAAAMAAAAdjQuMC4zMDMxOQAAAAAFAGwAAAD4AwAAI34AAGQEAACoBQAAI1N0cmluZ3MA
+AAAADAoAABABAAAjVVMAHAsAABAAAAAjR1VJRAAAACwLAAB8AQAAI0Jsb2IAAAAAAAAAAgAAAVcd
+ogEJAwAAAPoBMwAWAAABAAAAIQAAAAUAAAAGAAAACQAAAAEAAAAhAAAAAgAAABAAAAABAAAAAgAA
+AAMAAAAEAAAAAQAAAAQAAAABAAAAAQAAAAAAowMBAAAAAAAGAD4CiwQGAM0CiwQGAIoBeAQPAP8E
+AAAGALcBIQQGACECIQQGAAICIQQGALQCIQQGAF4CIQQGAHcCIQQGAM4BIQQGAOkBBQMKAJICUgMK
+AAkBUgMGADMEEAAGANsD1AMGAG0BeAQGAHkF1AMGAFsEqwQGADwEDAQOAD0BjQMOAJ4BjQMOACUB
+9wMGAFIBiwQKAHsDUgMSAEEFtAASAH4AtAAGAEgEEAAGAAEA1AMGACED1AMGANQA1AMGAIcA1AMG
+AJ8FIQQAAAAABwAAAAAAAQABAAEAEADsA0oAOQABAAEAAAAQALIEDgVJAAEAAwAAARAASwUOBV0A
+AwAHAAMBAABkBQAAQQAEAAoAEQDgA38AEQD5AIMAEQBuAIcABgY5AIsAVoBUBY4AVoDZAI4AUCAA
+AAAAhgDyAwYAAQAjIQAAAACGGGsEBgABACshAAAAAIMYawQGAAEAMyEAAAAAkwhXBJIAAQBfIQAA
+AACTCOEAlwABAGYhAAAAAJMI7QCcAAEAbiEAAAAAlgiABaIAAgB1IQAAAACGGGsEBgACAH0hAAAA
+AJEYcQSnAAIAAAABAP8CCQBrBAEAEQBrBAYAGQBrBAoAKQBrBBAAMQBrBBAAOQBrBBAAQQBrBBAA
+SQBrBBAAUQBrBBAAWQBrBBAAYQBrBBAAaQBrBAYAiQBrBAYAsQBrBBUAwQBrBAYAcQBcBSEAyQA9
+BSYA0QDLAysA2QDrAjEAkQAfAzUAeQBrBBAA4QCrADUA2QD1AjkAeQAoAz4A6QAfA0IA8QByBUcA
+yQCMBQEAcQBrBAYAkQBrBAYA+QCZAE0A+QCbBVUAmQBrBFsAuQBrBAYACAAUAHUACAAYAHoAKQBz
+AOIALgALALoALgATAMMALgAbAOIALgAjAOsALgArABQBLgAzABQBLgA7ABQBLgBDAOsALgBLABoB
+LgBTABQBLgBbADEBQwBjAHoASQBzAOIAYQB7AHoAYwBrAHoAGwADAAEABAADAAAAWwSrAAAAAQGw
+AAAAhAW1AAIABAADAAIABQAFAAEABgAFAAIABwAHAASAAAABAAAAixpECQAAAAAAAEoAAAAEAAAA
+AAAAAAAAAABjAEEAAAAAAA4AAAAAAAAAAAAAAGwAMwMAAAAABAAAAAAAAAAAAAAAYwDUAwAAAAAO
+AAAAAAAAAAAAAABsABoAAAAAAAAAAAABAAAAvAQAAAUAAgAAAABJbnQ2NAA8TW9kdWxlPgBTeXN0
+ZW0uSU8ATWljcm9zb2Z0LlNxbFNlcnZlci5NYW5hZ2VkRFRTAHZhbHVlX18AbXNjb3JsaWIAU1Rf
+Y2UxMWIyMDMwZmY4NDJkNTk3ZTcwZDM3MTNmODM2MWUAZGVmYXVsdEluc3RhbmNlAFZhcmlhYmxl
+AFJ1bnRpbWVUeXBlSGFuZGxlAEdldFR5cGVGcm9tSGFuZGxlAGdldF9OYW1lAE1pY3Jvc29mdC5T
+cWxTZXJ2ZXIuRHRzLlJ1bnRpbWUAVHlwZQBGYWlsdXJlAGdldF9DdWx0dXJlAHNldF9DdWx0dXJl
+AHJlc291cmNlQ3VsdHVyZQBWU1RBUlRTY3JpcHRPYmplY3RNb2RlbEJhc2UAQXBwbGljYXRpb25T
+ZXR0aW5nc0Jhc2UARWRpdG9yQnJvd3NhYmxlU3RhdGUAQ29tcGlsZXJHZW5lcmF0ZWRBdHRyaWJ1
+dGUARGVidWdnZXJOb25Vc2VyQ29kZUF0dHJpYnV0ZQBEZWJ1Z2dhYmxlQXR0cmlidXRlAEVkaXRv
+ckJyb3dzYWJsZUF0dHJpYnV0ZQBBc3NlbWJseVRpdGxlQXR0cmlidXRlAEFzc2VtYmx5VHJhZGVt
+YXJrQXR0cmlidXRlAFRhcmdldEZyYW1ld29ya0F0dHJpYnV0ZQBBc3NlbWJseUNvbmZpZ3VyYXRp
+b25BdHRyaWJ1dGUAQXNzZW1ibHlEZXNjcmlwdGlvbkF0dHJpYnV0ZQBDb21waWxhdGlvblJlbGF4
+YXRpb25zQXR0cmlidXRlAEFzc2VtYmx5UHJvZHVjdEF0dHJpYnV0ZQBBc3NlbWJseUNvcHlyaWdo
+dEF0dHJpYnV0ZQBTU0lTU2NyaXB0VGFza0VudHJ5UG9pbnRBdHRyaWJ1dGUAQXNzZW1ibHlDb21w
+YW55QXR0cmlidXRlAFJ1bnRpbWVDb21wYXRpYmlsaXR5QXR0cmlidXRlAGdldF9WYWx1ZQBzZXRf
+VmFsdWUAdmFsdWUAU3lzdGVtLlJ1bnRpbWUuVmVyc2lvbmluZwBUb1N0cmluZwBnZXRfTGVuZ3Ro
+AE1pY3Jvc29mdC5TcWxTZXJ2ZXIuU2NyaXB0VGFzawBNaWNyb3NvZnQuU3FsU2VydmVyLkR0cy5U
+YXNrcy5TY3JpcHRUYXNrAFNjcmlwdE9iamVjdE1vZGVsAFN5c3RlbS5Db21wb25lbnRNb2RlbABT
+VF9jZTExYjIwMzBmZjg0MmQ1OTdlNzBkMzcxM2Y4MzYxZS5kbGwAZ2V0X0l0ZW0AU3lzdGVtAEVu
+dW0AcmVzb3VyY2VNYW4AU2NyaXB0TWFpbgBTeXN0ZW0uQ29uZmlndXJhdGlvbgBTeXN0ZW0uR2xv
+YmFsaXphdGlvbgBTeXN0ZW0uUmVmbGVjdGlvbgBGaWxlSW5mbwBDdWx0dXJlSW5mbwBGaWxlU3lz
+dGVtSW5mbwBnZXRfUmVzb3VyY2VNYW5hZ2VyAC5jdG9yAC5jY3RvcgBTeXN0ZW0uRGlhZ25vc3Rp
+Y3MAU3lzdGVtLlJ1bnRpbWUuQ29tcGlsZXJTZXJ2aWNlcwBTeXN0ZW0uUmVzb3VyY2VzAFNUX2Nl
+MTFiMjAzMGZmODQyZDU5N2U3MGQzNzEzZjgzNjFlLlByb3BlcnRpZXMuUmVzb3VyY2VzLnJlc291
+cmNlcwBEZWJ1Z2dpbmdNb2RlcwBTVF9jZTExYjIwMzBmZjg0MmQ1OTdlNzBkMzcxM2Y4MzYxZS5Q
+cm9wZXJ0aWVzAGdldF9WYXJpYWJsZXMAU2V0dGluZ3MAU3VjY2VzcwBnZXRfRHRzAFNjcmlwdFJl
+c3VsdHMAQ29uY2F0AE9iamVjdABnZXRfRGVmYXVsdABzZXRfVGFza1Jlc3VsdABnZXRfQXNzZW1i
+bHkAABNVAHMAZQByADoAOgBmAHEAbgAALVUAcwBlAHIAOgA6AGEAcgBxAHUAaQB2AG8AXwB0AHgA
+dABfAG4AbwBtAGUAADNVAHMAZQByADoAOgBhAHIAcQB1AGkAdgBvAF8AdAB4AHQAXwB0AGEAbQBh
+AG4AaABvAAAHIwAsACMAAA0gAEIAeQB0AGUAcwAADzAAIABCAHkAdABlAHMAAHFTAFQAXwBjAGUA
+MQAxAGIAMgAwADMAMABmAGYAOAA0ADIAZAA1ADkANwBlADcAMABkADMANwAxADMAZgA4ADMANgAx
+AGUALgBQAHIAbwBwAGUAcgB0AGkAZQBzAC4AUgBlAHMAbwB1AHIAYwBlAHMAAAANs2wlRiabQacA
+NhtrhMegAAQgAQEIAyAAAQUgAQEREQQgAQEOBSABARFVBQcCEj0KBCAAEmUEIAASaQUgARJtHAMg
+ABwDIAAOBCABARwDIAAKBCABDg4FAAIODg4HAAESfRGAgQUgABKAhQcgAgEOEoCFCLd6XFYZNOCJ
+CImEXc2AgMyRBAAAAAAEAQAAAAMGEk0DBhJRAwYSEAIGCAMGERQEAAASTQQAABJRBQABARJRBAAA
+EhADAAABBAgAEk0ECAASUQQIABIQCAEACAAAAAAAHgEAAQBUAhZXcmFwTm9uRXhjZXB0aW9uVGhy
+b3dzAQgBAAIAAAAAACgBACNTVF9jZTExYjIwMzBmZjg0MmQ1OTdlNzBkMzcxM2Y4MzYxZQAABQEA
+AAAAFgEAEUNvcHlyaWdodCBAICAyMDE4AABJAQAaLk5FVEZyYW1ld29yayxWZXJzaW9uPXY0LjUB
+AFQOFEZyYW1ld29ya0Rpc3BsYXlOYW1lEi5ORVQgRnJhbWV3b3JrIDQuNQC0AAAAzsrvvgEAAACR
+AAAAbFN5c3RlbS5SZXNvdXJjZXMuUmVzb3VyY2VSZWFkZXIsIG1zY29ybGliLCBWZXJzaW9uPTQu
+MC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjc3YTVjNTYxOTM0ZTA4OSNT
+eXN0ZW0uUmVzb3VyY2VzLlJ1bnRpbWVSZXNvdXJjZVNldAIAAAAAAAAAAAAAAFBBRFBBRFC0AAAA
+FC8AAAAAAAAAAAAALi8AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAvAAAAAAAAAAAAAAAAX0Nv
+ckRsbE1haW4AbXNjb3JlZS5kbGwAAAAAAP8lACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAABABAAAAAYAACAAAAAAAAAAAAAAAAAAAABAAEAAAAwAACAAAAAAAAAAAAAAAAAAAABAAAA
+AABIAAAAWEAAABAEAAAAAAAAAAAAABAENAAAAFYAUwBfAFYARQBSAFMASQBPAE4AXwBJAE4ARgBP
+AAAAAAC9BO/+AAABAAAAAQBECYsaAAABAEQJixo/AAAAAAAAAAQAAAACAAAAAAAAAAAAAAAAAAAA
+RAAAAAEAVgBhAHIARgBpAGwAZQBJAG4AZgBvAAAAAAAkAAQAAABUAHIAYQBuAHMAbABhAHQAaQBv
+AG4AAAAAAAAAsARwAwAAAQBTAHQAcgBpAG4AZwBGAGkAbABlAEkAbgBmAG8AAABMAwAAAQAwADAA
+MAAwADAANABiADAAAAAaAAEAAQBDAG8AbQBtAGUAbgB0AHMAAAAAAAAAIgABAAEAQwBvAG0AcABh
+AG4AeQBOAGEAbQBlAAAAAAAAAAAAcAAkAAEARgBpAGwAZQBEAGUAcwBjAHIAaQBwAHQAaQBvAG4A
+AAAAAFMAVABfAGMAZQAxADEAYgAyADAAMwAwAGYAZgA4ADQAMgBkADUAOQA3AGUANwAwAGQAMwA3
+ADEAMwBmADgAMwA2ADEAZQAAADwADgABAEYAaQBsAGUAVgBlAHIAcwBpAG8AbgAAAAAAMQAuADAA
+LgA2ADcAOQA1AC4AMgAzADcAMgAAAHAAKAABAEkAbgB0AGUAcgBuAGEAbABOAGEAbQBlAAAAUwBU
+AF8AYwBlADEAMQBiADIAMAAzADAAZgBmADgANAAyAGQANQA5ADcAZQA3ADAAZAAzADcAMQAzAGYA
+OAAzADYAMQBlAC4AZABsAGwAAABIABIAAQBMAGUAZwBhAGwAQwBvAHAAeQByAGkAZwBoAHQAAABD
+AG8AcAB5AHIAaQBnAGgAdAAgAEAAIAAgADIAMAAxADgAAAAqAAEAAQBMAGUAZwBhAGwAVAByAGEA
+ZABlAG0AYQByAGsAcwAAAAAAAAAAAHgAKAABAE8AcgBpAGcAaQBuAGEAbABGAGkAbABlAG4AYQBt
+AGUAAABTAFQAXwBjAGUAMQAxAGIAMgAwADMAMABmAGYAOAA0ADIAZAA1ADkANwBlADcAMABkADMA
+NwAxADMAZgA4ADMANgAxAGUALgBkAGwAbAAAAGgAJAABAFAAcgBvAGQAdQBjAHQATgBhAG0AZQAA
+AAAAUwBUAF8AYwBlADEAMQBiADIAMAAzADAAZgBmADgANAAyAGQANQA5ADcAZQA3ADAAZAAzADcA
+MQAzAGYAOAAzADYAMQBlAAAAQAAOAAEAUAByAG8AZAB1AGMAdABWAGUAcgBzAGkAbwBuAAAAMQAu
+ADAALgA2ADcAOQA1AC4AMgAzADcAMgAAAEQADgABAEEAcwBzAGUAbQBiAGwAeQAgAFYAZQByAHMA
+aQBvAG4AAAAxAC4AMAAuADYANwA5ADUALgAyADMANwAyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAwAAABAPwAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</BinaryItem>
+                </ScriptProject>
+              </DTS:ObjectData>
+            </DTS:Executable>
+          </DTS:Executables>
+          <DTS:PrecedenceConstraints>
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado.PrecedenceConstraints[Constraint]"
+              DTS:CreationName=""
+              DTS:DTSID="{146467CB-F258-4F30-B474-8043CC3AFFAB}"
+              DTS:From="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\ET - Reinicia Numero Linha"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint"
+              DTS:To="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\ST-File Info" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado.PrecedenceConstraints[Constraint 1]"
+              DTS:CreationName=""
+              DTS:DTSID="{CDA7B14D-FBD8-4C95-95BD-311BBDDF32B4}"
+              DTS:From="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\ST-File Info"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 1"
+              DTS:To="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\EST - Cria Tabela Temporaria" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado.PrecedenceConstraints[Constraint 2]"
+              DTS:CreationName=""
+              DTS:DTSID="{711048DB-7ADD-43E9-A142-7354AB292EA3}"
+              DTS:From="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\EST - Cria Tabela Temporaria"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 2"
+              DTS:To="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado.PrecedenceConstraints[Constraint 3]"
+              DTS:CreationName=""
+              DTS:DTSID="{01427F4F-8ABF-447C-8DDA-0DB2C9A77F5B}"
+              DTS:From="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 3"
+              DTS:To="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\EST  - Quantidade de Linhas" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado.PrecedenceConstraints[Constraint 4]"
+              DTS:CreationName=""
+              DTS:DTSID="{EC4C7472-7A06-4C74-B891-6C635B083FD0}"
+              DTS:From="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\EST  - Quantidade de Linhas"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 4"
+              DTS:To="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\EST - Quantidade de Contas" />
+            <DTS:PrecedenceConstraint
+              DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado.PrecedenceConstraints[Constraint 5]"
+              DTS:CreationName=""
+              DTS:DTSID="{80C10749-D629-4DCB-A24A-C4FB9B48C1B8}"
+              DTS:From="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\EST - Quantidade de Contas"
+              DTS:LogicalAnd="True"
+              DTS:ObjectName="Constraint 5"
+              DTS:To="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\EST - Info Arquivo na tabela IMPORTACAO" />
+          </DTS:PrecedenceConstraints>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{05A0D0EC-06FD-48B1-842E-9762C26D74DB}"
+          DTS:From="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\EST - Executa lsp_Importar_SAS" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{B3BA57B6-0740-4D7D-81E0-2D1EE262F53B}"
+          DTS:From="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\EST - Executa lsp_Importar_SAS"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\FST - Cria Pasta de Destino Err"
+          DTS:Value="1" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO.PrecedenceConstraints[Constraint 2]"
+          DTS:CreationName=""
+          DTS:DTSID="{2D1B8B32-2CDE-4B2D-BB1E-F33DE1D3CF25}"
+          DTS:From="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\FST - Cria Pasta de Destino Err"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 2"
+          DTS:To="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\FST - Move Arquivo Texto mal Sucedido" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO.PrecedenceConstraints[Constraint 3]"
+          DTS:CreationName=""
+          DTS:DTSID="{CE2BBE88-85A0-4CD6-AD92-E3919F3470F8}"
+          DTS:From="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\EST - Executa lsp_Importar_SAS"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 3"
+          DTS:To="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\FST - Cria Pasta de Destino Succ" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO.PrecedenceConstraints[Constraint 4]"
+          DTS:CreationName=""
+          DTS:DTSID="{86603D20-B37E-4C04-8E46-1F16151D625B}"
+          DTS:From="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\FST - Cria Pasta de Destino Succ"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 4"
+          DTS:To="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\FST - Move Arquivo Texto bem Sucedido" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{685A3005-D7BE-4DF4-AF39-40C7675AEF73}"
+          DTS:ObjectName="{685A3005-D7BE-4DF4-AF39-40C7675AEF73}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::fqn" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{04095A70-039D-40FC-B167-37333F16F773}"
+      DTS:From="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\EST - Limpa Tabela Temporaria" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        <NodeLayout
+          Size="228,42"
+          Id="Package\EST - Limpa Tabela Temporaria"
+          TopLeft="352,1313" />
+        <NodeLayout
+          Size="232,42"
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\EST - Executa lsp_Importar_SAS"
+          TopLeft="253,712" />
+        <NodeLayout
+          Size="225,42"
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\FST - Cria Pasta de Destino Err"
+          TopLeft="95,819" />
+        <NodeLayout
+          Size="233,42"
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\FST - Cria Pasta de Destino Succ"
+          TopLeft="414,814" />
+        <NodeLayout
+          Size="271,42"
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\FST - Move Arquivo Texto bem Sucedido"
+          TopLeft="402,914" />
+        <NodeLayout
+          Size="271,42"
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\FST - Move Arquivo Texto mal Sucedido"
+          TopLeft="71,919" />
+        <NodeLayout
+          Size="249,42"
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria"
+          TopLeft="173,261" />
+        <NodeLayout
+          Size="213,42"
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\EST  - Quantidade de Linhas"
+          TopLeft="189,341" />
+        <NodeLayout
+          Size="218,42"
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\EST - Cria Tabela Temporaria"
+          TopLeft="185,185" />
+        <NodeLayout
+          Size="281,42"
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\EST - Info Arquivo na tabela IMPORTACAO"
+          TopLeft="149,505" />
+        <NodeLayout
+          Size="212,42"
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\EST - Quantidade de Contas"
+          TopLeft="183,417" />
+        <NodeLayout
+          Size="207,42"
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\ET - Reinicia Numero Linha"
+          TopLeft="192,40" />
+        <NodeLayout
+          Size="134,42"
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\ST-File Info"
+          TopLeft="228,110" />
+        <EdgeLayout
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado.PrecedenceConstraints[Constraint]"
+          TopLeft="295.25,82">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,28"
+              Start="0,0"
+              End="0,20.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado.PrecedenceConstraints[Constraint 1]"
+          TopLeft="294.5,152">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,33"
+              Start="0,0"
+              End="0,25.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado.PrecedenceConstraints[Constraint 2]"
+          TopLeft="295.75,227">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,34"
+              Start="0,0"
+              End="0,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado.PrecedenceConstraints[Constraint 3]"
+          TopLeft="296.5,303">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,38"
+              Start="0,0"
+              End="0,30.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado.PrecedenceConstraints[Constraint 4]"
+          TopLeft="292.25,383">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,34"
+              Start="0,0"
+              End="0,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado.PrecedenceConstraints[Constraint 5]"
+          TopLeft="289.25,459">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,46"
+              Start="0,0"
+              End="0,38.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,38.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="603,600"
+          Size="603,643"
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado"
+          TopLeft="70,27" />
+        <EdgeLayout
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO.PrecedenceConstraints[Constraint]"
+          TopLeft="370.25,670">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,42"
+              Start="0,0"
+              End="0,34.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,34.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO.PrecedenceConstraints[Constraint 1]"
+          TopLeft="331.666666666667,754">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-124.166666666667,65"
+              Start="0,0"
+              End="-124.166666666667,57.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.2671232876712" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.2671232876712"
+                    Point2="0,26.2671232876712"
+                    Point3="-4,26.2671232876712" />
+                  <mssgle:LineSegment
+                    End="-120.166666666667,26.2671232876712" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-120.166666666667,26.2671232876712"
+                    Point2="-124.166666666667,26.2671232876712"
+                    Point3="-124.166666666667,30.2671232876712" />
+                  <mssgle:LineSegment
+                    End="-124.166666666667,57.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-77.3246809895833,31.2671232876712,30.4826953125,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO.PrecedenceConstraints[Constraint 2]"
+          TopLeft="207,861">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO.PrecedenceConstraints[Constraint 3]"
+          TopLeft="406.333333333333,754">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="124.166666666667,60"
+              Start="0,0"
+              End="124.166666666667,52.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,20.2465753424658" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,20.2465753424658"
+                    Point2="0,24.2465753424658"
+                    Point3="4,24.2465753424658" />
+                  <mssgle:LineSegment
+                    End="120.166666666667,24.2465753424658" />
+                  <mssgle:CubicBezierSegment
+                    Point1="120.166666666667,24.2465753424658"
+                    Point2="124.166666666667,24.2465753424658"
+                    Point3="124.166666666667,28.2465753424658" />
+                  <mssgle:LineSegment
+                    End="124.166666666667,52.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO.PrecedenceConstraints[Constraint 4]"
+          TopLeft="534,856">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,58"
+              Start="0,0"
+              End="0,50.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="739,1015"
+          Size="739,1058"
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO"
+          TopLeft="103,187" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="469.25,1245">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,68"
+              Start="0,0"
+              End="0,60.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,60.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <AnnotationLayout
+          Text="Pacote para Importação de arquivos texto ORIGINAIS (SEM CONVERSÃO)"
+          ParentId="Package"
+          Size="699,46"
+          Id="40813e0e-ba90-43a1-914c-6138dacd911a"
+          TopLeft="93,148">
+          <AnnotationLayout.FontInfo>
+            <mssge:FontInfo
+              Family="Tahoma"
+              Size="18"
+              Color="#FF000000"
+              Weight="Bold">
+              <mssge:FontInfo.TextDecorations>
+                <av:TextDecorationCollection />
+              </mssge:FontInfo.TextDecorations>
+            </mssge:FontInfo>
+          </AnnotationLayout.FontInfo>
+        </AnnotationLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="157,42"
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\SC - Trata linhas"
+          TopLeft="337,240" />
+        <NodeLayout
+          Size="204,42"
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\FFS - Le arquivo texto SAS"
+          TopLeft="312,104" />
+        <NodeLayout
+          Size="211,42"
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria"
+          TopLeft="312,397" />
+        <EdgeLayout
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria.Paths[Output 0]"
+          TopLeft="416.5,282">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,115"
+              Start="0,0"
+              End="0,107.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,107.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria.Paths[Flat File Source Output]"
+          TopLeft="414.75,146">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,94"
+              Start="0,0"
+              End="0,86.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,86.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\FELC - Procura Arquivo Texto SAS - SEM CONVERSAO\SC - Controle Arquivo Importado\DFT - Insere Arquivo na Temporaria\OLD - Insere na Temporaria">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
