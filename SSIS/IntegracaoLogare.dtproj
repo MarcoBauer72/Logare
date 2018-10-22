@@ -24,7 +24,7 @@
           <SSIS:Property SSIS:Name="CreatorName">BAUER-PRECISION\Marco</SSIS:Property>
           <SSIS:Property SSIS:Name="CreatorComputerName">BAUER-PRECISION</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">Carga de Arquivos TXT SAS e XML TISS</SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwBf+vTFSsk6zDN6VnszaUwAAAAACAAAAAAAQZgAAAAEAACAAAABpyh0g69Pdt4wrRBZFS/miKstgD2VbSonlHLcmjduL3QAAAAAOgAAAAAIAACAAAACAlKHGzF9THZQeDyA5yRlB3bqLiWpgBCCWkaJFhIuKy5AAAAAEIvwf5l8Y+fTpVbQGKtEWmbFO8iKv5eE/IQ++qgddX022qkfaP0IFFSD9XJvkFmqjPbAUuMLXkTNwqRvMtfY+OozSN1O5LajXCK6x1XPthKcvKi2Pe2j25yruyW1YaPzkJq2zdyg/ipgu7LtpjeQb/gWeNDpwPYFMabnC5sAqveKt4r4r5ePLA+ljYSKThINAAAAA0cbKhYP+Blk5hTk+lJiTQ/jst08scrP4tOsZzPBzpF3grIvHwlQmFvoIxqMF8rlimPVvcY6fH8+2LYVSg0V4Bg==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwBf+vTFSsk6zDN6VnszaUwAAAAACAAAAAAAQZgAAAAEAACAAAACEZoTxecyNhzFqAP6b32Z/Z4DgSiOEgfCujdSj6MtwTgAAAAAOgAAAAAIAACAAAADMWETrt3N4ICmOlCRgu7yyb41NHH/8Py2TCZ8SCqnbTJAAAABgnnKGxIR3b7TtFQI+wqfFYkQTLz31m6GuJBk+MWxbagMStl/3AYf0mA9D2bebeVxSTVWq2JjL3KwhqqQL/rvM94vjvotdrpOO3DX5V9RerQH6CZMYO5VCn+3gWQnlheQPewfh07ywGz7WEf2C0gfNFSp0kv89AyC9xU7DlbZWAONHZ6B6CaXOg35QvqdzppJAAAAAfBuhtiCFi0+diY1ojti7lFJ0LoVN1vIVEiNrUycPz99vObvONCcC5w2iwef/RQy8aMy1Y08hCXH7b4cwUFobgg==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -315,10 +315,10 @@
                 <SSIS:Property SSIS:Name="Name">Exporta_TISS-Loga</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">113</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">135</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{3E141932-6AA3-4E3C-8E2A-9F4E38B031C4}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{418E5D24-5616-4415-8440-6B9F69C32AA9}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -332,9 +332,9 @@
                 <SSIS:Property SSIS:Name="Name">Importa_XML-TISS</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">893</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">906</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">Altera o BulkInsert do XML na tabela do banco de dados</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{865EBFF9-11EB-45F0-BCE4-BE551CA2AD4C}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{4A90459A-1DB0-4C88-94FB-0B6815C2C364}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>

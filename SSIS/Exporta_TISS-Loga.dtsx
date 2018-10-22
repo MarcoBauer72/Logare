@@ -12,8 +12,8 @@
   DTS:MaxErrorCount="999999"
   DTS:ObjectName="Exporta_TISS-Loga"
   DTS:PackageType="5"
-  DTS:VersionBuild="123"
-  DTS:VersionGUID="{5DAE7DF7-D356-4208-ACD7-E32D775D58E7}">
+  DTS:VersionBuild="135"
+  DTS:VersionGUID="{418E5D24-5616-4415-8440-6B9F69C32AA9}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables>
@@ -331,14 +331,14 @@ AND flag_movido_loga = 0</property>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Foreach Loop Container\EST - Importar TISS Staging para LOGA"
+          DTS:refId="Package\Foreach Loop Container\EST - Exportar TISS Staging para LOGA"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
           DTS:DTSID="{52b6e762-9923-4709-8ba7-b8dc14b90d06}"
           DTS:ExecutableType="Microsoft.ExecuteSQLTask"
           DTS:LocaleID="-1"
           DTS:MaxErrorCount="999999"
-          DTS:ObjectName="EST - Importar TISS Staging para LOGA"
+          DTS:ObjectName="EST - Exportar TISS Staging para LOGA"
           DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
@@ -364,7 +364,7 @@ AND flag_movido_loga = 0</property>
           DTS:From="Package\Foreach Loop Container\EST - Exporta TISS para Staging (TempDB)"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 4"
-          DTS:To="Package\Foreach Loop Container\EST - Importar TISS Staging para LOGA" />
+          DTS:To="Package\Foreach Loop Container\EST - Exportar TISS Staging para LOGA" />
       </DTS:PrecedenceConstraints>
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
@@ -433,7 +433,7 @@ AND flag_movido_loga = 0</property>
         <NodeLayout
           Size="252,41.6"
           Id="Package\EST - Atualiza Numero Guia Principal"
-          TopLeft="243.207937129663,445.1730097378" />
+          TopLeft="243.207937129663,446.702421523955" />
         <NodeLayout
           Size="271.2,41.6"
           Id="Package\EST - Corrige Prestadores no banco TISS"
@@ -447,9 +447,9 @@ AND flag_movido_loga = 0</property>
           Id="Package\Foreach Loop Container\EST - Exporta TISS para Staging (TempDB)"
           TopLeft="68.5204092364966,115.394580398656" />
         <NodeLayout
-          Size="266.4,41.6"
-          Id="Package\Foreach Loop Container\EST - Importar TISS Staging para LOGA"
-          TopLeft="69.6723364212773,214.269277012307" />
+          Size="264.8,41.6"
+          Id="Package\Foreach Loop Container\EST - Exportar TISS Staging para LOGA"
+          TopLeft="73.2437650535269,215.798688798462" />
         <EdgeLayout
           Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 3]"
           TopLeft="207.782087210293,65.1442537833534">
@@ -474,18 +474,18 @@ AND flag_movido_loga = 0</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 4]"
-          TopLeft="206.496372828887,156.994580398656">
+          TopLeft="207.882087145012,156.994580398656">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{x:Null}"
-              EndConnector="0,57.2746966136508"
+              EndConnector="0,58.8041083998062"
               Start="0,0"
-              End="0,49.7746966136508">
+              End="0,51.3041083998062">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,49.7746966136508" />
+                    End="0,51.3041083998062" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -525,18 +525,18 @@ AND flag_movido_loga = 0</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="367.241157051102,403.70980016077">
+          TopLeft="367.241157051101,403.70980016077">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{x:Null}"
-              EndConnector="0,41.4632095770301"
+              EndConnector="0,42.9926213631852"
               Start="0,0"
-              End="0,33.9632095770301">
+              End="0,35.4926213631852">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,33.9632095770301" />
+                    End="0,35.4926213631852" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -547,18 +547,18 @@ AND flag_movido_loga = 0</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="370.390365097892,486.7730097378">
+          TopLeft="370.390365097892,488.302421523955">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{x:Null}"
-              EndConnector="0,62.0673340939319"
+              EndConnector="0,60.5379223077767"
               Start="0,0"
-              End="0,54.5673340939319">
+              End="0,53.0379223077767">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,54.5673340939319" />
+                    End="0,53.0379223077767" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -614,7 +614,7 @@ AND flag_movido_loga = 0</property>
     design-time-name="Package\DFT - Arquivos para Exportar para o LOGA">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="181.6,41.6"
           Id="Package\DFT - Arquivos para Exportar para o LOGA\Recordset Destination"
@@ -642,9 +642,7 @@ AND flag_movido_loga = 0</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="0,0,0,0"
-              RelativePosition="Any" />
+            <EdgeLabelCollection />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
