@@ -12,10 +12,21 @@
   DTS:MaxErrorCount="999999"
   DTS:ObjectName="Exporta_TISS-Loga"
   DTS:PackageType="5"
-  DTS:VersionBuild="135"
-  DTS:VersionGUID="{418E5D24-5616-4415-8440-6B9F69C32AA9}">
+  DTS:VersionBuild="171"
+  DTS:VersionGUID="{B7022766-570E-4D31-8A27-0E141127F881}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{17FE6986-83A7-40F6-A475-92F2FC46053C}"
+      DTS:ObjectName="Operadora">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">NDS</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
   <DTS:Variables>
     <DTS:Variable
       DTS:CreationName=""
@@ -28,10 +39,37 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
+      DTS:DTSID="{5E77A749-DB73-4783-8BE3-84A00F40BDFD}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ChaveMSG_NDS">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
       DTS:DTSID="{64BC9CF5-8A83-48DC-92E7-08D6C44BC291}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
       DTS:ObjectName="TodasChavesMSG">
+      <DTS:VariableValue
+        DTS:DataSubType="ManagedSerializable"
+        DTS:DataType="13">
+        <SOAP-ENV:Envelope xmlns:clr="http://schemas.microsoft.com/soap/encoding/clr/1.0" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <xsd:anyType
+              id="ref-1"></xsd:anyType>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+      </DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{E59F8522-3FB3-48B6-BE16-7B040C32B486}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="TodasChavesMSG_NDS">
       <DTS:VariableValue
         DTS:DataSubType="ManagedSerializable"
         DTS:DataType="13">
@@ -211,6 +249,173 @@ AND flag_movido_loga = 0</property>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
+      DTS:refId="Package\DFT - Linhas NDS Exportar para o LOGA"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{6b39bf28-aa6b-442c-a0f4-900a6bea5b9e}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:MaxErrorCount="999999"
+      DTS:ObjectName="DFT - Linhas NDS Exportar para o LOGA"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT Chave AS ChaveNDS
+FROM [TISS].[dbo].[mensagemTISS]
+WHERE flag_importado = 1
+AND flag_movido_erro=0
+AND flag_movido_loga = 1
+AND op = 'INTERMEDICA'
+AND COALESCE(mensagemTISS.flag_movido_como_nds,0)=0
+AND dst_registroANS = '008000'</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="{92E5F84D-D599-4CAA-B760-2BD2C2DD3832}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[TISS]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source.Outputs[OLE DB Source Output].Columns[ChaveNDS]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ChaveNDS]"
+                      lineageId="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source.Outputs[OLE DB Source Output].Columns[ChaveNDS]"
+                      name="ChaveNDS"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ChaveNDS]"
+                      dataType="i4"
+                      name="ChaveNDS" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ChaveNDS]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ChaveNDS]"
+                      name="ChaveNDS" />
+                    <outputColumn
+                      refId="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DFT - Linhas NDS Exportar para o LOGA\Recordset Destination"
+              componentClassID="Microsoft.RecordsetDestination"
+              contactInfo="Recordset Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates and populates an in-memory ADO recordset that is available outside of the data flow. Scripts and other package elements can use the recordset. For example, use a recordset to store the names of files that will be loaded into the data warehouse."
+              name="Recordset Destination">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the recordset."
+                  name="VariableName">User::TodasChavesMSG_NDS</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\DFT - Linhas NDS Exportar para o LOGA\Recordset Destination.Inputs[Recordset Destination Input]"
+                  hasSideEffects="true"
+                  name="Recordset Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DFT - Linhas NDS Exportar para o LOGA\Recordset Destination.Inputs[Recordset Destination Input].Columns[ChaveNDS]"
+                      cachedDataType="i4"
+                      cachedName="ChaveNDS"
+                      lineageId="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source.Outputs[OLE DB Source Output].Columns[ChaveNDS]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DFT - Linhas NDS Exportar para o LOGA.Paths[OLE DB Source Output]"
+              endId="Package\DFT - Linhas NDS Exportar para o LOGA\Recordset Destination.Inputs[Recordset Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
       DTS:refId="Package\EST - Atualiza Data Emissao"
       DTS:CreationName="Microsoft.ExecuteSQLTask"
       DTS:Description="Execute SQL Task"
@@ -262,14 +467,47 @@ AND flag_movido_loga = 0</property>
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
-      DTS:refId="Package\Foreach Loop Container"
+      DTS:refId="Package\EST - Muda dst_registroANS"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{53111B67-7941-4FC1-8772-1943E399FCCB}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="EST - Muda dst_registroANS"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{92E5F84D-D599-4CAA-B760-2BD2C2DD3832}"
+          SQLTask:SqlStatementSource="dbo.lsp_TISS_Corrige_Prestadores_nds" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\ET - NAO NDS E NDS"
+      DTS:CreationName="Microsoft.ExpressionTask"
+      DTS:Description="Expression Task"
+      DTS:DTSID="{3F1A4661-F9F0-4646-9ABE-D023BF5278C3}"
+      DTS:ExecutableType="Microsoft.ExpressionTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="ET - NAO NDS E NDS"
+      DTS:TaskContact="Expression Task;Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ExpressionTask
+          Expression="@[$Package::Operadora]" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\FLC - Percorre linhas nao NDS"
       DTS:CreationName="STOCK:FOREACHLOOP"
       DTS:Description="Foreach Loop Container"
       DTS:DTSID="{A186996E-6188-4173-9993-D4288086C0F6}"
       DTS:ExecutableType="STOCK:FOREACHLOOP"
       DTS:LocaleID="-1"
       DTS:MaxErrorCount="999999"
-      DTS:ObjectName="Foreach Loop Container">
+      DTS:ObjectName="FLC - Percorre linhas nao NDS">
       <DTS:ForEachEnumerator
         DTS:CreationName="Microsoft.ForEachADOEnumerator"
         DTS:DTSID="{55788711-211D-4111-BD65-E07BDE78D362}"
@@ -283,7 +521,7 @@ AND flag_movido_loga = 0</property>
       <DTS:Variables />
       <DTS:Executables>
         <DTS:Executable
-          DTS:refId="Package\Foreach Loop Container\EST - Agrupa por Conta"
+          DTS:refId="Package\FLC - Percorre linhas nao NDS\EST - Agrupa por Conta"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
           DTS:DTSID="{aaef8e7c-a736-4da3-9e06-43afc14fc46f}"
@@ -307,7 +545,7 @@ AND flag_movido_loga = 0</property>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Foreach Loop Container\EST - Exporta TISS para Staging (TempDB)"
+          DTS:refId="Package\FLC - Percorre linhas nao NDS\EST - Exporta TISS para Staging (TempDB)"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
           DTS:DTSID="{69ce99f2-469e-445f-8d1f-c1757fa30ca8}"
@@ -331,7 +569,7 @@ AND flag_movido_loga = 0</property>
           </DTS:ObjectData>
         </DTS:Executable>
         <DTS:Executable
-          DTS:refId="Package\Foreach Loop Container\EST - Exportar TISS Staging para LOGA"
+          DTS:refId="Package\FLC - Percorre linhas nao NDS\EST - Exportar TISS Staging para LOGA"
           DTS:CreationName="Microsoft.ExecuteSQLTask"
           DTS:Description="Execute SQL Task"
           DTS:DTSID="{52b6e762-9923-4709-8ba7-b8dc14b90d06}"
@@ -350,21 +588,21 @@ AND flag_movido_loga = 0</property>
       </DTS:Executables>
       <DTS:PrecedenceConstraints>
         <DTS:PrecedenceConstraint
-          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 3]"
+          DTS:refId="Package\FLC - Percorre linhas nao NDS.PrecedenceConstraints[Constraint 3]"
           DTS:CreationName=""
           DTS:DTSID="{09da006c-f233-4ef6-9ce0-747fddfdae78}"
-          DTS:From="Package\Foreach Loop Container\EST - Agrupa por Conta"
+          DTS:From="Package\FLC - Percorre linhas nao NDS\EST - Agrupa por Conta"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 3"
-          DTS:To="Package\Foreach Loop Container\EST - Exporta TISS para Staging (TempDB)" />
+          DTS:To="Package\FLC - Percorre linhas nao NDS\EST - Exporta TISS para Staging (TempDB)" />
         <DTS:PrecedenceConstraint
-          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 4]"
+          DTS:refId="Package\FLC - Percorre linhas nao NDS.PrecedenceConstraints[Constraint 4]"
           DTS:CreationName=""
           DTS:DTSID="{723ec716-42a6-4526-9cb8-a356126934c1}"
-          DTS:From="Package\Foreach Loop Container\EST - Exporta TISS para Staging (TempDB)"
+          DTS:From="Package\FLC - Percorre linhas nao NDS\EST - Exporta TISS para Staging (TempDB)"
           DTS:LogicalAnd="True"
           DTS:ObjectName="Constraint 4"
-          DTS:To="Package\Foreach Loop Container\EST - Exportar TISS Staging para LOGA" />
+          DTS:To="Package\FLC - Percorre linhas nao NDS\EST - Exportar TISS Staging para LOGA" />
       </DTS:PrecedenceConstraints>
       <DTS:ForEachVariableMappings>
         <DTS:ForEachVariableMapping
@@ -373,6 +611,119 @@ AND flag_movido_loga = 0</property>
           DTS:ObjectName="{156CF23A-9823-4F2D-BD19-F33659F44134}"
           DTS:ValueIndex="0"
           DTS:VariableName="User::ChaveMSG" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\FLC - Percorre linhas NDS"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{3A89D00D-4F3E-4FD0-AEC3-1A40095F9871}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="FLC - Percorre linhas NDS">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachADOEnumerator"
+        DTS:DTSID="{E6933C78-FB15-46D5-BD81-4DF9E0864F58}"
+        DTS:ObjectName="{E6933C78-FB15-46D5-BD81-4DF9E0864F58}">
+        <DTS:ObjectData>
+          <FEEADO
+            EnumType="EnumerateRowsInFirstTable"
+            VarName="User::TodasChavesMSG_NDS" />
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\FLC - Percorre linhas NDS\EST - Agrupa por Conta"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{e079ae52-989b-4ff4-b1c7-2127a4ed8440}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:MaxErrorCount="999999"
+          DTS:ObjectName="EST - Agrupa por Conta"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{92E5F84D-D599-4CAA-B760-2BD2C2DD3832}"
+              SQLTask:SqlStatementSource="dbo.lsp_TISS_conta_pa ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::ChaveMSG_NDS"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FLC - Percorre linhas NDS\EST - Exporta TISS para Staging (TempDB)"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{1f91c06f-9ae3-4ef5-8261-467b5b6eedf4}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:MaxErrorCount="999999"
+          DTS:ObjectName="EST - Exporta TISS para Staging (TempDB)"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{92E5F84D-D599-4CAA-B760-2BD2C2DD3832}"
+              SQLTask:SqlStatementSource="dbo.lsp_TISS_Exporta_Staging_pa ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+              <SQLTask:ParameterBinding
+                SQLTask:ParameterName="0"
+                SQLTask:DtsVariableName="User::ChaveMSG_NDS"
+                SQLTask:ParameterDirection="Input"
+                SQLTask:DataType="3"
+                SQLTask:ParameterSize="-1" />
+            </SQLTask:SqlTaskData>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\FLC - Percorre linhas NDS\EST - Exportar TISS Staging para LOGA"
+          DTS:CreationName="Microsoft.ExecuteSQLTask"
+          DTS:Description="Execute SQL Task"
+          DTS:DTSID="{6c27995e-9908-46ca-bf4f-4a388f8bfe0b}"
+          DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+          DTS:LocaleID="-1"
+          DTS:MaxErrorCount="999999"
+          DTS:ObjectName="EST - Exportar TISS Staging para LOGA"
+          DTS:ThreadHint="1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <SQLTask:SqlTaskData
+              SQLTask:Connection="{92E5F84D-D599-4CAA-B760-2BD2C2DD3832}"
+              SQLTask:SqlStatementSource="dbo.lsp_Exportar_TISS_Staging_para_Loga_pa" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FLC - Percorre linhas NDS.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{AC2BC193-93F9-4A0C-BDFC-0E2AAB80BDFD}"
+          DTS:From="Package\FLC - Percorre linhas NDS\EST - Agrupa por Conta"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\FLC - Percorre linhas NDS\EST - Exporta TISS para Staging (TempDB)" />
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\FLC - Percorre linhas NDS.PrecedenceConstraints[Constraint 1]"
+          DTS:CreationName=""
+          DTS:DTSID="{BA048A07-38F2-4BDA-AF89-4DEE252350D9}"
+          DTS:From="Package\FLC - Percorre linhas NDS\EST - Exporta TISS para Staging (TempDB)"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint 1"
+          DTS:To="Package\FLC - Percorre linhas NDS\EST - Exportar TISS Staging para LOGA" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{657DBC96-6415-47B1-A482-EC06206E90BF}"
+          DTS:ObjectName="{657DBC96-6415-47B1-A482-EC06206E90BF}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::ChaveMSG_NDS" />
       </DTS:ForEachVariableMappings>
     </DTS:Executable>
   </DTS:Executables>
@@ -408,7 +759,45 @@ AND flag_movido_loga = 0</property>
       DTS:From="Package\DFT - Arquivos para Exportar para o LOGA"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 3"
-      DTS:To="Package\Foreach Loop Container" />
+      DTS:To="Package\FLC - Percorre linhas nao NDS" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{291A7BC6-86C2-41A8-A87E-6DBA96513272}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[$Package::Operadora] != &quot;NDS&quot;"
+      DTS:From="Package\ET - NAO NDS E NDS"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\EST - Corrige Prestadores no banco TISS"
+      DTS:Value="2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{8AD8E173-A3A4-4E5C-A6CE-68F3462EB98D}"
+      DTS:EvalOp="3"
+      DTS:Expression="@[$Package::Operadora] == &quot;NDS&quot;"
+      DTS:From="Package\ET - NAO NDS E NDS"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\EST - Muda dst_registroANS"
+      DTS:Value="2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 6]"
+      DTS:CreationName=""
+      DTS:DTSID="{216E98BA-F742-43B9-BAC0-8FE92CF1F47D}"
+      DTS:From="Package\EST - Muda dst_registroANS"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 6"
+      DTS:To="Package\DFT - Linhas NDS Exportar para o LOGA" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 7]"
+      DTS:CreationName=""
+      DTS:DTSID="{0B990EBB-2874-4FA8-9B19-61A20BF20B6C}"
+      DTS:From="Package\DFT - Linhas NDS Exportar para o LOGA"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 7"
+      DTS:To="Package\FLC - Percorre linhas NDS" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
 <!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
@@ -421,37 +810,41 @@ AND flag_movido_loga = 0</property>
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
         <NodeLayout
           Size="279.2,41.6"
           Id="Package\DFT - Arquivos para Exportar para o LOGA"
-          TopLeft="231.97279306612,548.840343831732" />
+          TopLeft="99.8299336728834,635.016815277944" />
         <NodeLayout
           Size="210.4,41.6"
           Id="Package\EST - Atualiza Data Emissao"
-          TopLeft="260.07437697254,362.10980016077" />
+          TopLeft="127.931517579303,448.286271606982" />
         <NodeLayout
           Size="252,41.6"
           Id="Package\EST - Atualiza Numero Guia Principal"
-          TopLeft="243.207937129663,446.702421523955" />
+          TopLeft="111.065077736426,532.878892970167" />
         <NodeLayout
           Size="271.2,41.6"
           Id="Package\EST - Corrige Prestadores no banco TISS"
-          TopLeft="228.784354721585,269.329409962954" />
+          TopLeft="96.6414953283484,355.505881409166" />
+        <NodeLayout
+          Size="178.4,41.6"
+          Id="Package\ET - NAO NDS E NDS"
+          TopLeft="380.000006471362,261.764707716279" />
         <NodeLayout
           Size="190.4,41.6"
-          Id="Package\Foreach Loop Container\EST - Agrupa por Conta"
+          Id="Package\FLC - Percorre linhas nao NDS\EST - Agrupa por Conta"
           TopLeft="110.243765184089,23.5442537833534" />
         <NodeLayout
           Size="283.2,41.6"
-          Id="Package\Foreach Loop Container\EST - Exporta TISS para Staging (TempDB)"
+          Id="Package\FLC - Percorre linhas nao NDS\EST - Exporta TISS para Staging (TempDB)"
           TopLeft="68.5204092364966,115.394580398656" />
         <NodeLayout
           Size="264.8,41.6"
-          Id="Package\Foreach Loop Container\EST - Exportar TISS Staging para LOGA"
+          Id="Package\FLC - Percorre linhas nao NDS\EST - Exportar TISS Staging para LOGA"
           TopLeft="73.2437650535269,215.798688798462" />
         <EdgeLayout
-          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 3]"
+          Id="Package\FLC - Percorre linhas nao NDS.PrecedenceConstraints[Constraint 3]"
           TopLeft="207.782087210293,65.1442537833534">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -473,7 +866,7 @@ AND flag_movido_loga = 0</property>
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint 4]"
+          Id="Package\FLC - Percorre linhas nao NDS.PrecedenceConstraints[Constraint 4]"
           TopLeft="207.882087145012,156.994580398656">
           <EdgeLayout.Curve>
             <mssgle:Curve
@@ -497,24 +890,24 @@ AND flag_movido_loga = 0</property>
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="408.8,311.2"
-          Size="408.8,354.4"
-          Id="Package\Foreach Loop Container"
-          TopLeft="166.911567468337,644.165832639931" />
+          PanelSize="408.8,288"
+          Size="408.8,331.2"
+          Id="Package\FLC - Percorre linhas nao NDS"
+          TopLeft="34.7687080751004,730.342304086143" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
-          TopLeft="364.829365847062,310.929409962954">
+          TopLeft="232.686506453826,397.105881409166">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{x:Null}"
-              EndConnector="0,51.1803901978161"
+              EndConnector="0,51.180390197816"
               Start="0,0"
-              End="0,43.6803901978161">
+              End="0,43.680390197816">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,43.6803901978161" />
+                    End="0,43.680390197816" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -525,7 +918,7 @@ AND flag_movido_loga = 0</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 1]"
-          TopLeft="367.241157051101,403.70980016077">
+          TopLeft="235.098297657865,489.886271606982">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{x:Null}"
@@ -547,18 +940,18 @@ AND flag_movido_loga = 0</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 2]"
-          TopLeft="370.390365097892,488.302421523955">
+          TopLeft="238.247505704655,574.478892970167">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{x:Null}"
-              EndConnector="0,60.5379223077767"
+              EndConnector="0,60.5379223077766"
               Start="0,0"
-              End="0,53.0379223077767">
+              End="0,53.0379223077766">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,53.0379223077767" />
+                    End="0,53.0379223077766" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -569,24 +962,60 @@ AND flag_movido_loga = 0</property>
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 3]"
-          TopLeft="371.442180267228,590.440343831732">
+          TopLeft="239.299320873992,676.616815277944">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{x:Null}"
-              EndConnector="0,53.7254888081989"
+              EndConnector="0,53.725488808199"
               Start="0,0"
-              End="0,46.2254888081989">
+              End="0,46.225488808199">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,46.2254888081989" />
+                    End="0,46.225488808199" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="440.800006471362,303.364707716279">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="-208.558511143014,52.141173692887"
+              Start="0,0"
+              End="-208.558511143014,44.641173692887">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.1345557368502" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.1345557368502"
+                    Point2="0,21.1345557368502"
+                    Point3="-4,21.1345557368502" />
+                  <mssgle:LineSegment
+                    End="-204.558511143014,21.1345557368502" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-204.558511143014,21.1345557368502"
+                    Point2="-208.558511143014,21.1345557368502"
+                    Point3="-208.558511143014,25.1345557368502" />
+                  <mssgle:LineSegment
+                    End="-208.558511143014,44.641173692887" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-138.244841509007,26.1345557368502,67.931171875,16"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <AnnotationLayout
@@ -607,6 +1036,157 @@ AND flag_movido_loga = 0</property>
             </mssge:FontInfo>
           </AnnotationLayout.FontInfo>
         </AnnotationLayout>
+        <NodeLayout
+          Size="211.2,41.6"
+          Id="Package\EST - Muda dst_registroANS"
+          TopLeft="623.673480008851,346.689078841537" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="497.600006471362,303.364707716279">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="231.673473537489,43.324371125258"
+              Start="0,0"
+              End="231.673473537489,35.824371125258">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.5608117627713" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.5608117627713"
+                    Point2="0,17.5608117627713"
+                    Point3="4,17.5608117627713" />
+                  <mssgle:LineSegment
+                    End="227.673473537489,17.5608117627713" />
+                  <mssgle:CubicBezierSegment
+                    Point1="227.673473537489,17.5608117627713"
+                    Point2="231.673473537489,17.5608117627713"
+                    Point3="231.673473537489,21.5608117627713" />
+                  <mssgle:LineSegment
+                    End="231.673473537489,35.824371125258" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="81.8711508312447,22.5608117627713,67.931171875,16"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="190.4,41.6"
+          Id="Package\FLC - Percorre linhas NDS\EST - Agrupa por Conta"
+          TopLeft="96.734694503139,41.6470585661364" />
+        <NodeLayout
+          Size="283.2,41.6"
+          Id="Package\FLC - Percorre linhas NDS\EST - Exporta TISS para Staging (TempDB)"
+          TopLeft="51.8367345548579,124.020167540184" />
+        <NodeLayout
+          Size="264.8,41.6"
+          Id="Package\FLC - Percorre linhas NDS\EST - Exportar TISS Staging para LOGA"
+          TopLeft="54.6102137462741,209.81549240792" />
+        <EdgeLayout
+          Id="Package\FLC - Percorre linhas NDS.PrecedenceConstraints[Constraint]"
+          TopLeft="192.685714528998,83.2470585661364">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,40.7731089740477"
+              Start="0,0"
+              End="0,33.2731089740477">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.2731089740477" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FLC - Percorre linhas NDS.PrecedenceConstraints[Constraint 1]"
+          TopLeft="190.223474150566,165.620167540184">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,44.1953248677363"
+              Start="0,0"
+              End="0,36.6953248677363">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.6953248677363" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="384.8,306.4"
+          Size="384.8,349.6"
+          Id="Package\FLC - Percorre linhas NDS"
+          TopLeft="546.938784824516,719.416812777555" />
+        <NodeLayout
+          Size="268,41.6"
+          Id="Package\DFT - Linhas NDS Exportar para o LOGA"
+          TopLeft="601.632663306968,468.907567646028" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 6]"
+          TopLeft="732.45307165791,388.289078841537">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,80.6184888044913"
+              Start="0,0"
+              End="0,73.1184888044913">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,73.1184888044913" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 7]"
+          TopLeft="737.485724065742,510.507567646028">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,208.909245131527"
+              Start="0,0"
+              End="0,201.409245131527">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,201.409245131527" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -650,6 +1230,52 @@ AND flag_movido_loga = 0</property>
   </TaskHost>
   <PipelineComponentMetadata
     design-time-name="Package\DFT - Arquivos para Exportar para o LOGA\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DFT - Linhas NDS Exportar para o LOGA">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source"
+          TopLeft="172.000002929143,49.5529418714319" />
+        <NodeLayout
+          Size="181.6,41.6"
+          Id="Package\DFT - Linhas NDS Exportar para o LOGA\Recordset Destination"
+          TopLeft="163.428574211743,143.764707898599" />
+        <EdgeLayout
+          Id="Package\DFT - Linhas NDS Exportar para o LOGA.Paths[OLE DB Source Output]"
+          TopLeft="250.514288570443,91.1529418714319">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{x:Null}"
+              EndConnector="0,52.6117660271671"
+              Start="0,0"
+              End="0,45.1117660271671">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,45.1117660271671" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source">
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
