@@ -24,7 +24,7 @@
           <SSIS:Property SSIS:Name="CreatorName">BAUER-PRECISION\Marco</SSIS:Property>
           <SSIS:Property SSIS:Name="CreatorComputerName">BAUER-PRECISION</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">Carga de Arquivos TXT SAS e XML TISS</SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwBf+vTFSsk6zDN6VnszaUwAAAAACAAAAAAAQZgAAAAEAACAAAACm8arz2CA7F9rRfAxQNXlTEeTopUhPWNShEB4K5es1qwAAAAAOgAAAAAIAACAAAAD2+sE5yvmO4Pww68QNt1t39YGvlf2yyNjB/fjGioCAPpAAAABFk446pyMJHA1vfZ1PJhx8kmcOsfmAuPS64KtP/a/nl9C6F4FucRyE5mBG89kfv4ri6tds4nTNmE+4dd/LBA7c+ElGGn5KOy+eVhgi+TFNzFXtHu85BBJ3o0s5TWBGrhq4+R0WGtZVobN3gqIrMYp/hhhwXl8lLMzFC1lUy7NuRSbndixe9v/Cz36+FKx+cEpAAAAA1w1oxwshWRqlr4SS61Ccb9Nl5orDri84FfkKcIGtMMMAhvF26tKgxcXr8FMwEHy3oZBbH0y9VIyPgTSBPB2dfg==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwBf+vTFSsk6zDN6VnszaUwAAAAACAAAAAAAQZgAAAAEAACAAAAAJzgqp2T5mDVBOOCgYSqgZU0jCdDw0h/54vbSkNJntKAAAAAAOgAAAAAIAACAAAAA0tiyWS+MqRlOa9UP6bHAA1ac4TLdTVPGBtJvGo0hiCJAAAACzgBRjZp7AW6eVhGwyidn3T8UWGplf/EQBt3SYZGzRMkzTPsWydzoma4Llke9CJspWNWG8IO8o8zpA7ACmYkNc2LYdgEC1M36NFnI2VRNQb84L70agp236MV7APxxX3r9IF8kzWmw00zFyloN/YUTWwR3M0WiYzNfYCS5R9G0m424sGt5lyAjRsQtqUfwOJidAAAAAolcriSu3qqLxdVq6CnZsimZMOHYwjqGEgqJ7behk69g5BkwR1eA/I4eInbLL6ZTOIFNfQbPtUwma65YQLfbpMw==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -315,10 +315,10 @@
                 <SSIS:Property SSIS:Name="Name">Exporta_TISS-Loga</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">171</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">172</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{B7022766-570E-4D31-8A27-0E141127F881}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{2976C9A9-EF07-45BC-806D-61A540F97201}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -335,7 +335,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">NDS</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">INTERMEDICA</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
