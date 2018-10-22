@@ -12,9 +12,9 @@
   DTS:MaxErrorCount="999999"
   DTS:ObjectName="Importa_XML-TISS"
   DTS:PackageType="5"
-  DTS:VersionBuild="906"
+  DTS:VersionBuild="908"
   DTS:VersionComments="Altera o BulkInsert do XML na tabela do banco de dados"
-  DTS:VersionGUID="{4A90459A-1DB0-4C88-94FB-0B6815C2C364}">
+  DTS:VersionGUID="{CB833BAC-7C1E-4D83-8752-36293F94AAD5}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -256,6 +256,15 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
+      DTS:DTSID="{F6A0B9D6-CDE0-40F0-ABD6-5758A5029BC4}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="Operadora">
+      <DTS:VariableValue
+        DTS:DataType="8">TODAS EXCETO NDS</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
       DTS:DTSID="{63A00E2C-AF9B-43AD-9A36-2143EA3AAA7F}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
@@ -337,6 +346,10 @@
           <UseProjectReference>True</UseProjectReference>
           <ExecuteOutOfProcess>True</ExecuteOutOfProcess>
           <PackageName>Exporta_TISS-Loga.dtsx</PackageName>
+          <ParameterAssignment>
+            <ParameterName>Operadora</ParameterName>
+            <BindedVariableOrParameterName>User::Operadora</BindedVariableOrParameterName>
+          </ParameterAssignment>
         </ExecutePackageTask>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -414,7 +427,7 @@
           DTS:MaxErrorCount="999999"
           DTS:ObjectName="EST - Atualiza tabela MensagemTISS - Erro 1"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -439,7 +452,7 @@
           DTS:MaxErrorCount="999999"
           DTS:ObjectName="EST - Atualiza tabela MensagemTISS - Erro 2"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -464,7 +477,7 @@
           DTS:MaxErrorCount="999999"
           DTS:ObjectName="EST - Atualiza tabela MensagemTISS Erro 3"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -489,7 +502,7 @@
           DTS:MaxErrorCount="999999"
           DTS:ObjectName="EST - Atualiza tabela MensagemTISS OK"
           DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -513,7 +526,7 @@
           DTS:LocaleID="-1"
           DTS:MaxErrorCount="999999"
           DTS:ObjectName="EST - COMMIT"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="2">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -619,7 +632,7 @@
           DTS:LocaleID="-1"
           DTS:MaxErrorCount="999999"
           DTS:ObjectName="EST - ROLLBACK succ"
-          DTS:ThreadHint="2">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -1879,14 +1892,35 @@
               ReadOnlyVariables="User::fqn"
               ReadWriteVariables="User::arquivo_txt_nome,User::arquivo_txt_tamanho">
               <ProjectItem
-                Name="Properties\Settings.settings"
-                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
-</SettingsFile>]]></ProjectItem>
+                Name="Properties\AssemblyInfo.cs"
+                Encoding="UTF8"><![CDATA[using System.Reflection;
+using System.Runtime.CompilerServices;
+
+//
+// General Information about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the information
+// associated with an assembly.
+//
+[assembly: AssemblyTitle("ST_1a022c60d1d246a88770f11be0ce28ff")]
+[assembly: AssemblyDescription("")]
+[assembly: AssemblyConfiguration("")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("ST_1a022c60d1d246a88770f11be0ce28ff")]
+[assembly: AssemblyCopyright("Copyright @  2018")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
+//
+// Version information for an assembly consists of the following four values:
+//
+//      Major Version
+//      Minor Version 
+//      Build Number
+//      Revision
+//
+// You can specify all the values or you can default the Revision and Build Numbers 
+// by using the '*' as shown below:
+
+[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.resx"
                 Encoding="UTF8"><![CDATA[<?xml version="1.0" encoding="utf-8"?>
@@ -2274,35 +2308,14 @@ namespace ST_1a022c60d1d246a88770f11be0ce28ff.Properties {
     }
 }]]></ProjectItem>
               <ProjectItem
-                Name="Properties\AssemblyInfo.cs"
-                Encoding="UTF8"><![CDATA[using System.Reflection;
-using System.Runtime.CompilerServices;
-
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle("ST_1a022c60d1d246a88770f11be0ce28ff")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ST_1a022c60d1d246a88770f11be0ce28ff")]
-[assembly: AssemblyCopyright("Copyright @  2018")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.0.*")]]]></ProjectItem>
+                Name="Properties\Settings.settings"
+                Encoding="UTF8"><![CDATA[<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings />
+</SettingsFile>]]></ProjectItem>
               <ProjectItem
                 Name="Properties\Resources.Designer.cs"
                 Encoding="UTF8"><![CDATA[//------------------------------------------------------------------------------
