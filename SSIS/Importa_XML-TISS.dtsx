@@ -12,9 +12,9 @@
   DTS:MaxErrorCount="999999"
   DTS:ObjectName="Importa_XML-TISS"
   DTS:PackageType="5"
-  DTS:VersionBuild="908"
+  DTS:VersionBuild="911"
   DTS:VersionComments="Altera o BulkInsert do XML na tabela do banco de dados"
-  DTS:VersionGUID="{CB833BAC-7C1E-4D83-8752-36293F94AAD5}">
+  DTS:VersionGUID="{C63981AC-6D7C-4925-AE74-36DB1D0D3AA3}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -49,6 +49,15 @@
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
   <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{8EBE5816-F09C-46E6-A502-7218B90C13E8}"
+      DTS:ObjectName="Operadora">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">INTERMEDICA</DTS:Property>
+    </DTS:PackageParameter>
     <DTS:PackageParameter
       DTS:CreationName=""
       DTS:DataType="8"
@@ -256,15 +265,6 @@
     </DTS:Variable>
     <DTS:Variable
       DTS:CreationName=""
-      DTS:DTSID="{F6A0B9D6-CDE0-40F0-ABD6-5758A5029BC4}"
-      DTS:IncludeInDebugDump="2345"
-      DTS:Namespace="User"
-      DTS:ObjectName="Operadora">
-      <DTS:VariableValue
-        DTS:DataType="8">TODAS EXCETO NDS</DTS:VariableValue>
-    </DTS:Variable>
-    <DTS:Variable
-      DTS:CreationName=""
       DTS:DTSID="{63A00E2C-AF9B-43AD-9A36-2143EA3AAA7F}"
       DTS:IncludeInDebugDump="6789"
       DTS:Namespace="User"
@@ -348,7 +348,7 @@
           <PackageName>Exporta_TISS-Loga.dtsx</PackageName>
           <ParameterAssignment>
             <ParameterName>Operadora</ParameterName>
-            <BindedVariableOrParameterName>User::Operadora</BindedVariableOrParameterName>
+            <BindedVariableOrParameterName>$Package::Operadora</BindedVariableOrParameterName>
           </ParameterAssignment>
         </ExecutePackageTask>
       </DTS:ObjectData>

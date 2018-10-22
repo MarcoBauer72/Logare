@@ -12,8 +12,8 @@
   DTS:MaxErrorCount="999999"
   DTS:ObjectName="Exporta_TISS-Loga"
   DTS:PackageType="5"
-  DTS:VersionBuild="172"
-  DTS:VersionGUID="{2976C9A9-EF07-45BC-806D-61A540F97201}">
+  DTS:VersionBuild="175"
+  DTS:VersionGUID="{135A3C10-D1EC-449A-B8A0-B4546E80693D}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:PackageParameters>
@@ -24,7 +24,7 @@
       DTS:ObjectName="Operadora">
       <DTS:Property
         DTS:DataType="8"
-        DTS:Name="ParameterValue">INTERMEDICA</DTS:Property>
+        DTS:Name="ParameterValue">TODAS EXCETO NDS</DTS:Property>
     </DTS:PackageParameter>
   </DTS:PackageParameters>
   <DTS:Variables>
@@ -424,7 +424,7 @@ AND dst_registroANS = '008000'</property>
       DTS:LocaleID="-1"
       DTS:MaxErrorCount="999999"
       DTS:ObjectName="EST - Atualiza Data Emissao"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -441,7 +441,7 @@ AND dst_registroANS = '008000'</property>
       DTS:LocaleID="-1"
       DTS:MaxErrorCount="999999"
       DTS:ObjectName="EST - Atualiza Numero Guia Principal"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -458,7 +458,7 @@ AND dst_registroANS = '008000'</property>
       DTS:LocaleID="-1"
       DTS:MaxErrorCount="999999"
       DTS:ObjectName="EST - Corrige Prestadores no banco TISS"
-      DTS:ThreadHint="1">
+      DTS:ThreadHint="0">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -475,7 +475,7 @@ AND dst_registroANS = '008000'</property>
       DTS:LocaleID="-1"
       DTS:ObjectName="EST - Muda dst_registroANS"
       DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
-      DTS:ThreadHint="0">
+      DTS:ThreadHint="1">
       <DTS:Variables />
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
@@ -529,7 +529,7 @@ AND dst_registroANS = '008000'</property>
           DTS:LocaleID="-1"
           DTS:MaxErrorCount="999999"
           DTS:ObjectName="EST - Agrupa por Conta"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -553,7 +553,7 @@ AND dst_registroANS = '008000'</property>
           DTS:LocaleID="-1"
           DTS:MaxErrorCount="999999"
           DTS:ObjectName="EST - Exporta TISS para Staging (TempDB)"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -577,7 +577,7 @@ AND dst_registroANS = '008000'</property>
           DTS:LocaleID="-1"
           DTS:MaxErrorCount="999999"
           DTS:ObjectName="EST - Exportar TISS Staging para LOGA"
-          DTS:ThreadHint="1">
+          DTS:ThreadHint="0">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -642,7 +642,7 @@ AND dst_registroANS = '008000'</property>
           DTS:LocaleID="-1"
           DTS:MaxErrorCount="999999"
           DTS:ObjectName="EST - Agrupa por Conta"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -666,7 +666,7 @@ AND dst_registroANS = '008000'</property>
           DTS:LocaleID="-1"
           DTS:MaxErrorCount="999999"
           DTS:ObjectName="EST - Exporta TISS para Staging (TempDB)"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -690,7 +690,7 @@ AND dst_registroANS = '008000'</property>
           DTS:LocaleID="-1"
           DTS:MaxErrorCount="999999"
           DTS:ObjectName="EST - Exportar TISS Staging para LOGA"
-          DTS:ThreadHint="0">
+          DTS:ThreadHint="1">
           <DTS:Variables />
           <DTS:ObjectData>
             <SQLTask:SqlTaskData
@@ -810,7 +810,7 @@ AND dst_registroANS = '008000'</property>
     design-time-name="Package">
     <LayoutInfo>
       <GraphLayout
-        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph" xmlns:mssge="clr-namespace:Microsoft.SqlServer.Graph.Extended;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
         <NodeLayout
           Size="279.2,41.6"
           Id="Package\DFT - Arquivos para Exportar para o LOGA"
@@ -856,7 +856,7 @@ AND dst_registroANS = '008000'</property>
           TopLeft="207.782087210293,65.1442537833534">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,50.2503266153026"
               Start="0,0"
               End="0,42.7503266153026">
@@ -878,7 +878,7 @@ AND dst_registroANS = '008000'</property>
           TopLeft="207.882087145012,156.994580398656">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,58.8041083998062"
               Start="0,0"
               End="0,51.3041083998062">
@@ -919,7 +919,7 @@ AND dst_registroANS = '008000'</property>
           TopLeft="192.685714528998,83.2470585661364">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,40.7731089740477"
               Start="0,0"
               End="0,33.2731089740477">
@@ -941,7 +941,7 @@ AND dst_registroANS = '008000'</property>
           TopLeft="190.223474150566,165.620167540184">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,44.1953248677363"
               Start="0,0"
               End="0,36.6953248677363">
@@ -970,7 +970,7 @@ AND dst_registroANS = '008000'</property>
           TopLeft="232.686506453826,397.105881409166">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,51.180390197816"
               Start="0,0"
               End="0,43.680390197816">
@@ -992,7 +992,7 @@ AND dst_registroANS = '008000'</property>
           TopLeft="235.098297657865,489.886271606982">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,42.9926213631852"
               Start="0,0"
               End="0,35.4926213631852">
@@ -1014,7 +1014,7 @@ AND dst_registroANS = '008000'</property>
           TopLeft="238.247505704655,574.478892970167">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,60.5379223077766"
               Start="0,0"
               End="0,53.0379223077766">
@@ -1036,7 +1036,7 @@ AND dst_registroANS = '008000'</property>
           TopLeft="239.299320873992,676.616815277944">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,53.725488808199"
               Start="0,0"
               End="0,46.225488808199">
@@ -1058,7 +1058,7 @@ AND dst_registroANS = '008000'</property>
           TopLeft="440.800006471362,303.364707716279">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="-208.558511143014,52.141173692887"
               Start="0,0"
               End="-208.558511143014,44.641173692887">
@@ -1094,7 +1094,7 @@ AND dst_registroANS = '008000'</property>
           TopLeft="497.600006471362,303.364707716279">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="231.673473537489,43.324371125258"
               Start="0,0"
               End="231.673473537489,35.824371125258">
@@ -1130,7 +1130,7 @@ AND dst_registroANS = '008000'</property>
           TopLeft="732.45307165791,388.289078841537">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,80.6184888044913"
               Start="0,0"
               End="0,73.1184888044913">
@@ -1152,7 +1152,7 @@ AND dst_registroANS = '008000'</property>
           TopLeft="737.485724065742,510.507567646028">
           <EdgeLayout.Curve>
             <mssgle:Curve
-              StartConnector="{assembly:Null}"
+              StartConnector="{x:Null}"
               EndConnector="0,208.909245131527"
               Start="0,0"
               End="0,201.409245131527">
@@ -1194,7 +1194,7 @@ AND dst_registroANS = '008000'</property>
     design-time-name="Package\DFT - Arquivos para Exportar para o LOGA">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="181.6,41.6"
           Id="Package\DFT - Arquivos para Exportar para o LOGA\Recordset Destination"
@@ -1222,7 +1222,9 @@ AND dst_registroANS = '008000'</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -1240,15 +1242,15 @@ AND dst_registroANS = '008000'</property>
     design-time-name="Package\DFT - Linhas NDS Exportar para o LOGA">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="149.6,41.6"
-          Id="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source"
-          TopLeft="172.000002929143,49.5529418714319" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="181.6,41.6"
           Id="Package\DFT - Linhas NDS Exportar para o LOGA\Recordset Destination"
           TopLeft="163.428574211743,143.764707898599" />
+        <NodeLayout
+          Size="149.6,41.6"
+          Id="Package\DFT - Linhas NDS Exportar para o LOGA\OLE DB Source"
+          TopLeft="172.000002929143,49.5529418714319" />
         <EdgeLayout
           Id="Package\DFT - Linhas NDS Exportar para o LOGA.Paths[OLE DB Source Output]"
           TopLeft="250.514288570443,91.1529418714319">
@@ -1268,7 +1270,9 @@ AND dst_registroANS = '008000'</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>

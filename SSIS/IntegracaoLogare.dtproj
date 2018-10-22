@@ -24,7 +24,7 @@
           <SSIS:Property SSIS:Name="CreatorName">BAUER-PRECISION\Marco</SSIS:Property>
           <SSIS:Property SSIS:Name="CreatorComputerName">BAUER-PRECISION</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">Carga de Arquivos TXT SAS e XML TISS</SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwBf+vTFSsk6zDN6VnszaUwAAAAACAAAAAAAQZgAAAAEAACAAAAAJzgqp2T5mDVBOOCgYSqgZU0jCdDw0h/54vbSkNJntKAAAAAAOgAAAAAIAACAAAAA0tiyWS+MqRlOa9UP6bHAA1ac4TLdTVPGBtJvGo0hiCJAAAACzgBRjZp7AW6eVhGwyidn3T8UWGplf/EQBt3SYZGzRMkzTPsWydzoma4Llke9CJspWNWG8IO8o8zpA7ACmYkNc2LYdgEC1M36NFnI2VRNQb84L70agp236MV7APxxX3r9IF8kzWmw00zFyloN/YUTWwR3M0WiYzNfYCS5R9G0m424sGt5lyAjRsQtqUfwOJidAAAAAolcriSu3qqLxdVq6CnZsimZMOHYwjqGEgqJ7behk69g5BkwR1eA/I4eInbLL6ZTOIFNfQbPtUwma65YQLfbpMw==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAwBf+vTFSsk6zDN6VnszaUwAAAAACAAAAAAAQZgAAAAEAACAAAACtiqdiKyIIufU1vi5JppW056WVcsxtMV0Z+yJGBnQFOwAAAAAOgAAAAAIAACAAAABxhWUb463+IneWBUcEXoT5MuJLJU/cXswJaaOn7D19eZAAAAB5BUuVzeGfKWJ+xuzv0dFY3ogeHJ1dXlUyI6WI4YLZAGXcRBK8STrJDhMeFilmVCKQW6lHthj8QVlEdVhplzMO+iUMCZbF15Dekz74XkK5AH9k22rIbPhH3RJSycgsJcjBKVVm7jc3GCROxUABX6oEm5U4uWWLFCobUoIeE9hH4Pf6kd8gWFkuXudFv2z7HqJAAAAAqFdx38xSkYong5r+6nzS9HZxk+F4ERX99kgurx6caSzKFyT5F1MDIq7SRDJF/tEwiD7lVQPmUHU3lWFB/yHo+g==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
@@ -315,10 +315,10 @@
                 <SSIS:Property SSIS:Name="Name">Exporta_TISS-Loga</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">172</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">175</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">
                 </SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{2976C9A9-EF07-45BC-806D-61A540F97201}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{135A3C10-D1EC-449A-B8A0-B4546E80693D}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
@@ -335,7 +335,7 @@
                     <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
                     <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
-                    <SSIS:Property SSIS:Name="Value">INTERMEDICA</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">TODAS EXCETO NDS</SSIS:Property>
                     <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
                   </SSIS:Properties>
                 </SSIS:Parameter>
@@ -347,15 +347,29 @@
                 <SSIS:Property SSIS:Name="Name">Importa_XML-TISS</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMajor">1</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionMinor">0</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionBuild">906</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionBuild">911</SSIS:Property>
                 <SSIS:Property SSIS:Name="VersionComments">Altera o BulkInsert do XML na tabela do banco de dados</SSIS:Property>
-                <SSIS:Property SSIS:Name="VersionGUID">{4A90459A-1DB0-4C88-94FB-0B6815C2C364}</SSIS:Property>
+                <SSIS:Property SSIS:Name="VersionGUID">{C63981AC-6D7C-4925-AE74-36DB1D0D3AA3}</SSIS:Property>
                 <SSIS:Property SSIS:Name="PackageFormatVersion">8</SSIS:Property>
                 <SSIS:Property SSIS:Name="Description">
                 </SSIS:Property>
                 <SSIS:Property SSIS:Name="ProtectionLevel">1</SSIS:Property>
               </SSIS:Properties>
               <SSIS:Parameters>
+                <SSIS:Parameter SSIS:Name="Operadora">
+                  <SSIS:Properties>
+                    <SSIS:Property SSIS:Name="ID">{8EBE5816-F09C-46E6-A502-7218B90C13E8}</SSIS:Property>
+                    <SSIS:Property SSIS:Name="CreationName">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="Description">
+                    </SSIS:Property>
+                    <SSIS:Property SSIS:Name="IncludeInDebugDump">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Required">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Sensitive">0</SSIS:Property>
+                    <SSIS:Property SSIS:Name="Value">INTERMEDICA</SSIS:Property>
+                    <SSIS:Property SSIS:Name="DataType">18</SSIS:Property>
+                  </SSIS:Properties>
+                </SSIS:Parameter>
                 <SSIS:Parameter SSIS:Name="PastaArquivosXML">
                   <SSIS:Properties>
                     <SSIS:Property SSIS:Name="ID">{ED547EBB-705A-432B-85EF-6C48D1F4C7E7}</SSIS:Property>
